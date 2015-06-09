@@ -14,4 +14,8 @@ grape.
    this step won't be necessary)
 3. start application by `rackup`
 
+## License
+
+GNU/LGPL 3 or later
+
 [caro]: http://github.com/igneus/calendarium-romanum

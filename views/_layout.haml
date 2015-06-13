@@ -1,0 +1,19 @@
+!!!
+
+%html
+  %head
+    %title Church Calendar API
+
+    %link{rel: 'stylesheet', type: 'text/css', href: '/style.css'}
+
+  %body
+    #menu
+      %ul
+        %li
+          %a{href: '/'} Home
+        %li
+          %a{href: '/browse'} Browse Calendar
+        %li
+          %a{href: '/api-doc'} API Documentation
+
+    #content= yield

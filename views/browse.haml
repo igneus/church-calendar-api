@@ -1,0 +1,7 @@
+%h1 Browse Church Calendar
+
+- start_year.upto(end_year) do |year|
+  %p
+    %strong= year
+    - 1.upto(12) do |month|
+      %a{href: "/browse/#{year}/#{month}"}= month

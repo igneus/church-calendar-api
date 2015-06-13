@@ -11,6 +11,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    blankslate (3.1.3)
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -48,6 +49,8 @@ GEM
       ffi
       guard (~> 2.3)
       spoon
+    haml (4.0.5)
+      tilt
     hashie (3.4.2)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -57,6 +60,7 @@ GEM
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    log4r (1.1.10)
     lumberjack (1.0.9)
     method_source (0.8.2)
     minitest (5.7.0)
@@ -66,6 +70,8 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    parslet (1.7.0)
+      blankslate (>= 2.0, <= 4.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -78,12 +84,20 @@ GEM
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    scorched (0.24)
+      rack (~> 1.4)
+      rack-accept (~> 0.4)
+      scorched-accept (~> 0.1)
+      tilt (~> 1.4)
+    scorched-accept (0.1)
+      parslet (~> 1.7)
     shellany (0.0.1)
     slop (3.6.0)
     spoon (0.0.4)
       ffi
     thor (0.19.1)
     thread_safe (0.3.5)
+    tilt (1.4.1)
     timers (4.0.1)
       hitimes
     tzinfo (1.2.2)
@@ -102,3 +116,6 @@ DEPENDENCIES
   grape-entity
   guard
   guard-rack
+  haml
+  log4r
+  scorched

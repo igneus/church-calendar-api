@@ -1,0 +1,11 @@
+td { vertical-align: top; }
+
+.tar { text-align: right; }
+
+.tt { font-family: monospace; }
+
+.celebration { border-radius: 2px; margin: 3px; }
+.red { background-color: #f33; }
+.green { background-color: #cfc; }
+.white { background-color: #fff; }
+.violet { background-color: violet; }

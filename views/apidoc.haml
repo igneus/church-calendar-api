@@ -1,0 +1,35 @@
+%h1 API Documentation
+
+%p
+  The Church Calendar API awaits your requests for calendar entries.
+
+%p
+  The routes are as follows:
+
+%table{border: 1}
+  %tr
+    %td.tt
+      \/api/v1/calendar/spec
+    %td
+      description of the calendar
+  %tr
+    %td.tt
+      \/api/v1/calendar/promulgated
+    %td
+      year of the calendar's promulgation (requests for dates prior to this
+      year will fail)
+  %tr
+    %td.tt
+      \/api/v1/today
+    %td
+      entry for the current day
+  %tr
+    %td.tt
+      \/api/v1/YYYY/MM/DD
+    %td
+      entry for any valid date newer than the year of promulgation
+  %tr
+    %td.tt
+      \/api/v1/YYYY/MM
+    %td
+      list of entries for the given month

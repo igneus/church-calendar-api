@@ -8,7 +8,6 @@ module ChurchCalendar
   class API < Grape::API
     version 'v1', using: :path
     format :json
-    prefix :api
 
     # year of promulgation of this calendar
     CALENDAR_START = 1969
@@ -86,4 +85,3 @@ module ChurchCalendar
     end
   end
 end
-

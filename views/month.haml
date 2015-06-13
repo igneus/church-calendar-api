@@ -1,0 +1,24 @@
+%h1 Browse Church Calendar
+
+%p
+  go to:
+  - if month > 1
+    %a{href: "/browse/#{year}/#{month-1}"} previous
+  - 1.upto(12) do |i|
+    - if i == month
+      %strong= i
+    - else
+      %a{href: "/browse/#{year}/#{i}"}= i
+  - if month < 12
+    %a{href: "/browse/#{year}/#{month+1}"} next
+
+%h2= "#{year} / #{month}"
+
+%table{border: 1}
+  - entries.each do |d|
+    %tr
+      %td.tar= d.date.day
+      %td= format_weekday d.weekday
+      %td
+        - d.celebrations.each do |c|
+          %div{class: "celebration #{c.colour}"}= celebration_text d, c

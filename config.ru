@@ -1,3 +1,3 @@
-require_relative './app.rb'
+require_relative './api.rb'
 
 run ChurchCalendar::API

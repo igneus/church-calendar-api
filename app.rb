@@ -44,6 +44,14 @@ module ChurchCalendar
       end
     end
 
+    get 'today' do
+      day = Date.today
+      calendar = CalendariumRomanum::Calendar.for_day day
+
+      cal_day = calendar.day day
+      present cal_day, with: ChurchCalendar::Day
+    end
+
     segment '/:year' do
       before do
         @year = get_year params[:year]

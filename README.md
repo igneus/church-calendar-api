@@ -1,6 +1,7 @@
 # Church Calendar API
 
-Query Roman Catholic liturgical calendar through HTTP requests.
+Browse Roman Catholic liturgical calendar through a web interface
+or obtain it's data in JSON format through an API.
 
 Powered by
 [calendarium-romanum][caro] and
@@ -12,7 +13,7 @@ grape.
    `$ bundle install`
 2. manually install [calendarium-romanum][caro] (once it is released,
    this step won't be necessary)
-3. start application by `rackup`
+3. start application by `$ rackup`
 
 ## License
 

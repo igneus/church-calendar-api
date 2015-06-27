@@ -75,6 +75,20 @@ describe ChurchCalendar::API do
           @r['weekday'].must_equal 'friday'
         end
       end
+
+      describe 'memorial' do
+        before do
+          get api_path '/2015/6/11'
+          @r = dejson last_response.body
+        end
+
+        it 'has sanctorale celebrations' do
+          c = @r['celebrations']
+          c.size.must_equal 1
+          c[0]['rank'].must_equal 'memorial'
+          c[0]['title'].must_equal 'Saint Barnabas the Apostle'
+        end
+      end
     end
 
     describe 'invalid date' do

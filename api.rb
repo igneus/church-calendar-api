@@ -4,6 +4,7 @@ require 'calendarium-romanum'
 
 require_relative 'app/entities/celebration.rb'
 require_relative 'app/entities/day.rb'
+require_relative 'app/calendarfactory.rb'
 
 CR = CalendariumRomanum
 
@@ -13,6 +14,7 @@ module ChurchCalendar
     format :json
 
     # year of promulgation of this calendar
+    # (of the calendar system, not of any particular sanctorale data set)
     CALENDAR_START = 1969
 
     helpers do
@@ -33,6 +35,14 @@ module ChurchCalendar
       end
     end
 
+    before do
+      sanctorale_file = ENV['CALENDAR_DATAFILE']
+      if sanctorale_file.nil?
+        raise 'specify sanctorale data - environment variable CALENDAR_DATAFILE'
+      end
+      @factory = CalendarFactory.new sanctorale_file
+    end
+
     desc 'Human-readable specification of the calendar provided'
     get '/calendar' do
       {
@@ -44,7 +54,7 @@ module ChurchCalendar
 
     get 'today' do
       day = Date.today
-      calendar = CR::Calendar.for_day day
+      calendar = @factory.for_day day
 
       cal_day = calendar.day day
       present cal_day, with: ChurchCalendar::Day
@@ -53,7 +63,7 @@ module ChurchCalendar
     segment '/:year' do
       before do
         @year = get_year params[:year]
-        @calendar = CR::Calendar.new @year
+        @calendar = @factory.for_year @year
       end
 
       get do
@@ -84,7 +94,7 @@ module ChurchCalendar
         end
         get '/:day' do
           day = Date.new @year, params[:month], params[:day]
-          calendar = CR::Calendar.for_day day
+          calendar = @factory.for_day day
           year = @calendar.year
 
           cal_day = calendar.day @year, params[:month], params[:day]

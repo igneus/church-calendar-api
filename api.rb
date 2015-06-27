@@ -56,7 +56,7 @@ module ChurchCalendar
         @calendar = CR::Calendar.new @year
       end
 
-      get '/' do
+      get do
         {
          lectionary: @calendar.lectionary,
          ferial_lectionary: @calendar.ferial_lectionary
@@ -67,7 +67,7 @@ module ChurchCalendar
         requires :month, type: Integer, values: 1..12
       end
       segment '/:month' do
-        get '/' do
+        get do
           cal = @calendar
           begin
             CR::Util::Month.new(@year, params[:month]).collect do |date|

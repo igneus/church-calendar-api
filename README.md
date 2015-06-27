@@ -7,6 +7,11 @@ Powered by
 [calendarium-romanum][caro] and
 grape.
 
+## Explore it on-line
+
+Documentation with examples and live links:
+http://calapi.inadiutorium.cz/api-doc
+
 ## Installation and running
 
 1. install dependencies using Bundler

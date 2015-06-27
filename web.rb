@@ -84,7 +84,7 @@ module ChurchCalendar
       @cal = Calendar.for_day date
       sanctorale_file = ENV['CALENDAR_DATAFILE']
       if sanctorale_file.nil? || sanctorale_file.empty?
-        sanctorale_file = YAML.load_file('config/calendars.yml')['default'][0]
+        sanctorale_file = File.join(File.dirname(__FILE__), 'data', YAML.load_file('config/calendars.yml')['default'][0])
       end
 
       loader = SanctoraleLoader.new

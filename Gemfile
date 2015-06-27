@@ -7,7 +7,7 @@ gem 'scorched'
 gem 'haml'
 
 gem 'log4r'
-# gem 'calendarium-romanum' # use the unreleased development version for now
+gem 'calendarium-romanum', github: 'igneus/calendarium-romanum'
 
 group :development do
   gem "guard"

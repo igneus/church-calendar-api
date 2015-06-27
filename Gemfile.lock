@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/igneus/calendarium-romanum.git
+  revision: 1f19e317fe84a48ae9ef6c2e1f47a6497273c763
+  specs:
+    calendarium-romanum (0.0.0)
+      i18n
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,6 +140,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  calendarium-romanum!
   capistrano (~> 3.0.1)
   capistrano-bundler
   capistrano-rvm

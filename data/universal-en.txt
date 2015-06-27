@@ -1,0 +1,240 @@
+# General Roman Calendar in English
+# source: https://en.wikipedia.org/wiki/General_Roman_Calendar
+
+= 1
+1 s : Octave Day of Christmas,  of Mary, Mother of God
+2 m : Saints Basil the Great and Gregory Nazianzen, bishops and doctors
+3 : The Most Holy Name of Jesus
+6 s : Epiphany
+7 : Saint Raymond of Penyafort, priest
+13 : Saint Hilary of Poitiers, bishop and doctor
+17 m : Saint Anthony of Egypt, abbot
+20 R : Saint Fabian, pope and martyr
+20 R : Saint Sebastian, martyr
+21 m R : Saint Agnes, virgin and martyr
+22 R : Saint Vincent, deacon and martyr
+24 m : Saint Francis de Sales, bishop and doctor
+25 f : The Conversion of Saint Paul, apostle
+26 m : Saints Timothy and Titus, bishops
+27 : Saint Angela Merici, virgin
+28 m : Saint Thomas Aquinas, priest and doctor
+31 m : Saint John Bosco, priest
+
+= 2
+2 f2.5 : Presentation of the Lord
+3 R : Saint Blase, bishop and martyr
+3 : Saint Ansgar, bishop
+5 m R : Saint Agatha, virgin and martyr
+6 m R : Saints Paul Miki and companions, martyrs
+8 : Saint Jerome Emiliani, priest
+8 : Saint Josephine Bakhita, virgin
+10 m : Saint Scholastica, virgin
+11 : Our Lady of Lourdes
+14 m : Saints Cyril, monk, and Methodius, bishop
+17 : Seven Holy Founders of the Servite Order
+21 : Saint Peter Damian, bishop and doctor of the Church
+22 f : Chair of Saint Peter, apostle
+23 m R : Saint Polycarp, bishop and martyr
+
+= 3
+4 : Saint Casimir
+7 m R : Saints Perpetua and Felicity, martyrs
+8 : Saint John of God, religious
+9 : Saint Frances of Rome, religious
+17 : Saint Patrick, bishop
+18 : Saint Cyril of Jerusalem, bishop and doctor
+19 s : Saint Joseph Husband of the Blessed Virgin Mary
+23 : Saint Turibius of Mogrovejo, bishop
+25 s : Annunciation of the Lord
+
+= 4
+2 : Saint Francis of Paola, hermit
+4 : Saint Isidore, bishop and doctor of the Church
+5 : Saint Vincent Ferrer, priest
+7 m : Saint John Baptist de la Salle, priest
+11 m R : Saint Stanislaus, bishop and martyr
+13 R : Saint Martin I, pope and martyr
+21 : Saint Anselm of Canterbury, bishop and doctor of the Church
+23 R : Saint George, martyr
+23 R : Saint Adalbert, bishop and martyr
+24 R : Saint Fidelis of Sigmaringen, priest and martyr
+25 f R : Saint Mark the Evangelist
+28 R : Saint Peter Chanel, priest and martyr
+28 : Saint Louis Grignon de Montfort, priest
+29 m : Saint Catherine of Siena, virgin and doctor of the Church
+30 : Saint Pius V, pope
+
+= 5
+1 : Saint Joseph the Worker
+2 m : Saint Athanasius, bishop and doctor
+3 f R : Saints Philip and James, Apostles
+12 R : Saints Nereus and Achilleus, martyrs
+12 R : Saint Pancras, martyr
+13 : Our Lady of Fatima
+14 f R : Saint Matthias the Apostle
+18 R : Saint John I, pope and martyr
+20 : Saint Bernardine of Siena, priest
+21 R : Saint Christopher Magallanes and companions, martyrs
+22 : Saint Rita of Cascia
+25 : Saint Bede the Venerable, priest and doctor
+25 : Saint Gregory VII, pope
+25 : Saint Mary Magdalene de Pazzi, virgin
+26 m : Saint Philip Neri, priest
+27 : Saint Augustine (Austin) of Canterbury, bishop
+31 f : Visitation of the Blessed Virgin Mary
+
+= 6
+1 m R : Saint Justin Martyr
+2 R : Saints Marcellinus and Peter, martyrs
+3 m R : Saints Charles Lwanga and companions, martyrs
+5 m R : Saint Boniface, bishop and martyr
+6 : Saint Norbert, bishop
+9 : Saint Ephrem, deacon and doctor
+11 m R : Saint Barnabas the Apostle
+13 m : Saint Anthony of Padua, priest and doctor
+19 : Saint Romuald, abbot
+21 m : Saint Aloysius Gonzaga, religious
+22 : Saint Paulinus of Nola, bishop
+22 R : Saints John Fisher, bishop and martyr and Thomas More, martyr
+24 s : Birth of Saint John the Baptist
+27 : Saint Cyril of Alexandria, bishop and doctor
+28 m R : Saint Irenaeus, bishop and martyr
+29 s R : Saints Peter and Paul, Apostles
+30 R : First Martyrs of the Church of Rome
+
+= 7
+3 f R : Saint Thomas the Apostle
+4 : Saint Elizabeth of Portugal
+5 : Saint Anthony Zaccaria, priest
+6 R : Saint Maria Goretti, virgin and martyr
+9 R : Saint Augustine Zhao Rong and companions, martyrs
+11 m : Saint Benedict, abbot
+13 : Saint Henry
+14 : Saint Camillus de Lellis, priest
+15 m : Saint Bonaventure, bishop and doctor
+16 : Our Lady of Mount Carmel
+20 : Saint Apollinaris
+21 : Saint Lawrence of Brindisi, priest and doctor
+22 m : Saint Mary Magdalene
+23 : Saint Birgitta, religious
+24 : Saint Sharbel Makhluf, hermit
+25 f R : Saint James, apostle
+26 m : Saints Joachim and Anne
+29 m R : Saint Martha
+30 : Saint Peter Chrysologus, bishop and doctor
+31 m : Saint Ignatius of Loyola, priest
+
+= 8
+1 m : Saint Alphonsus Maria de Liguori, bishop and doctor of the Church
+2 : Saint Eusebius of Vercelli, bishop
+2 : Saint Peter Julian Eymard, priest
+4 m : Saint Jean Vianney (the Curé of Ars), priest
+5 : Dedication of the Basilica of Saint Mary Major
+6 f2.5 : Transfiguration of the Lord
+7 R : Saint Sixtus II, pope, and companions, martyrs
+7 : Saint Cajetan, priest
+8 m : Saint Dominic, priest
+9 R : Saint Teresa Benedicta of the Cross (Edith Stein), virgin and martyr
+10 f R : Saint Lawrence, deacon and martyr
+11 m : Saint Clare, virgin
+12 : Saint Jane Frances de Chantal, religious
+13 R : Saints Pontian, pope, and Hippolytus, priest, martyrs
+14 m R : Saint Maximilian Mary Kolbe, priest and martyr
+15 s : Assumption of the Blessed Virgin Mary
+16 : Saint Stephen of Hungary
+19 : Saint John Eudes, priest
+20 m : Saint Bernard of Clairvaux, abbot and doctor of the Church
+21 m : Saint Pius X, pope
+22 m : Queenship of Blessed Virgin Mary
+23 : Saint Rose of Lima, virgin
+24 f R : Saint Bartholomew the Apostle
+25 : Saint Louis
+25 : Saint Joseph of Calasanz, priest
+27 m : Saint Monica
+28 m : Saint Augustine of Hippo, bishop and doctor of the Church
+29 m R : The Beheading of Saint John the Baptist, martyr
+
+= 9
+3 m : Saint Gregory the Great, pope and doctor
+8 f : Birth of the Blessed Virgin Mary
+9 : Saint Peter Claver, priest
+12 : Holy Name of the Blessed Virgin Mary
+13 m : Saint John Chrysostom, bishop and doctor
+14 f R : Triumph of the Holy Cross
+15 m : Our Lady of Sorrows
+16 m R : Saints Cornelius, pope, and Cyprian, bishop, martyrs
+17 : Saint Robert Bellarmine, bishop and doctor
+19 R : Saint Januarius, bishop and martyr
+20 m R : Saint Andrew Kim Taegon, priest, and Paul Chong Hasang and companions, martyrs
+21 f R : Saint Matthew the Evangelist, Apostle, Evangelist
+23 m : Saint Pio of Pietrelcina (Padre Pio), priest
+26 R : Saints Cosmas and Damian, martyrs
+27 m : Saint Vincent de Paul, priest
+28 R : Saint Wenceslaus, martyr
+28 R : Saints Lawrence Ruiz and companions, martyrs
+29 f : Saints Michael, Gabriel and Raphael, Archangels
+30 m : Saint Jerome, priest and doctor
+
+= 10
+1 m : Saint Thérèse of the Child Jesus, virgin and doctor
+2 m : Guardian Angels
+4 m : Saint Francis of Assisi
+6 : Saint Bruno, priest
+7 m : Our Lady of the Rosary
+9 R : Saint Denis and companions, martyrs
+9 : Saint John Leonardi, priest
+11 : Saint John XXIII, pope
+14 R : Saint Callistus I, pope and martyr
+15 m : Saint Teresa of Jesus, virgin and doctor
+16 : Saint Hedwig, religious
+16 : Saint Margaret Mary Alacoque, virgin
+17 m R : Saint Ignatius of Antioch, bishop and martyr
+18 f R : Saint Luke the Evangelist
+19 R : Saints Jean de Brébeuf, Isaac Jogues, priests and martyrs; and their companions, martyrs
+19 : Saint Paul of the Cross, priest
+22 : Saint John Paul II, pope
+23 : Saint John of Capistrano, priest
+24 : Saint Anthony Mary Claret, bishop
+28 f R : Saint Simon and Saint Jude, apostles
+
+= 11
+1 s : All Saints
+2 : All Souls
+3 R : Saint Martin de Porres, religious
+4 m : Saint Charles Borromeo, bishop
+9 f : Dedication of the Lateran basilica
+10 m : Saint Leo the Great, pope and doctor
+11 m R : Saint Martin of Tours, bishop
+12 m R : Saint Josaphat, bishop and martyr
+15 : Saint Albert the Great, bishop and doctor
+16 : Saint Margaret of Scotland
+16 : Saint Gertrude the Great, virgin
+17 m : Saint Elizabeth of Hungary, religious
+18 : Dedication of the basilicas of Saints Peter and Paul, Apostles
+21 m : Presentation of the Blessed Virgin Mary
+22 m : Saint Cecilia
+23 R : Saint Clement I, pope and martyr
+23 : Saint Columban, religious
+24 m R : Saint Andrew Dung Lac and his companions, martyrs
+25 : Saint Catherine of Alexandria
+30 f R : Saint Andrew the Apostle
+
+= 12
+3 m : Saint Francis Xavier, priest
+4 : Saint John Damascene, priest and doctor
+6 : Saint Nicholas, bishop
+7 m : Saint Ambrose, bishop and doctor
+8 s : Immaculate Conception of the Blessed Virgin Mary
+9 : Saint Juan Diego
+11 : Saint Damasus I, pope
+12 : Our Lady of Guadalupe
+13 m R : Saint Lucy of Syracuse, virgin and martyr
+14 m : Saint John of the Cross, priest and doctor
+21 : Saint Peter Canisius, priest and doctor
+23 : Saint John of Kanty, priest
+25 s : Nativity of the Lord
+26 f R : Saint Stephen, the first martyr
+27 f : Saint John the Apostle and evangelist
+28 f R : Holy Innocents, martyrs
+29 R : Saint Thomas Becket, bishop and martyr
+31 : Saint Sylvester I, pope

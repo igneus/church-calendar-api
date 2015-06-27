@@ -1,6 +1,7 @@
 require 'scorched'
 require 'haml'
 require 'calendarium-romanum'
+require 'yaml'
 
 module ChurchCalendar
   class Web < Scorched::Controller
@@ -81,14 +82,13 @@ module ChurchCalendar
 
     def prepare_calendar(date)
       @cal = Calendar.for_day date
-      cal_var = 'CALENDAR_DATAFILE'
-      calendar_source = ENV[cal_var]
-      if calendar_source.nil?
-        raise RuntimeError.new "Calendar not specified. Please, set environment variable #{cal_var}."
+      sanctorale_file = ENV['CALENDAR_DATAFILE']
+      if sanctorale_file.nil? || sanctorale_file.empty?
+        sanctorale_file = YAML.load_file('config/calendars.yml')['default'][0]
       end
 
       loader = SanctoraleLoader.new
-      loader.load_from_file @cal, calendar_source
+      loader.load_from_file @cal, sanctorale_file
     end
   end
 end

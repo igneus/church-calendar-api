@@ -1,5 +1,6 @@
 require 'grape'
 require 'grape-entity'
+require 'yaml'
 require 'calendarium-romanum'
 
 require_relative 'app/entities/celebration.rb'
@@ -37,8 +38,8 @@ module ChurchCalendar
 
     before do
       sanctorale_file = ENV['CALENDAR_DATAFILE']
-      if sanctorale_file.nil?
-        raise 'specify sanctorale data - environment variable CALENDAR_DATAFILE'
+      if sanctorale_file.nil? || sanctorale_file.empty?
+        sanctorale_file = YAML.load_file('config/calendars.yml')['default'][0]
       end
       @factory = CalendarFactory.new sanctorale_file
     end

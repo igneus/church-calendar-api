@@ -2,11 +2,14 @@ require 'grape'
 require 'grape-entity'
 require 'calendarium-romanum'
 
-require_relative 'app/entities/day'
+require_relative 'app/entities/celebration.rb'
+require_relative 'app/entities/day.rb'
+
+CR = CalendariumRomanum
 
 module ChurchCalendar
   class API < Grape::API
-    version 'v1', using: :path
+    version 'v0', using: :path
     format :json
 
     # year of promulgation of this calendar
@@ -25,7 +28,7 @@ module ChurchCalendar
 
       def validate_year!(year)
         if year < CALENDAR_START
-          raise ValueError.new "The calendar was promulgated in #{CALENDAR_START}, #{year} is invalid year"
+          error! "Bad Request: The calendar was promulgated in #{CALENDAR_START}, #{year} is invalid year", 400
         end
       end
     end
@@ -41,7 +44,7 @@ module ChurchCalendar
 
     get 'today' do
       day = Date.today
-      calendar = CalendariumRomanum::Calendar.for_day day
+      calendar = CR::Calendar.for_day day
 
       cal_day = calendar.day day
       present cal_day, with: ChurchCalendar::Day
@@ -50,7 +53,7 @@ module ChurchCalendar
     segment '/:year' do
       before do
         @year = get_year params[:year]
-        @calendar = CalendariumRomanum::Calendar.new @year
+        @calendar = CR::Calendar.new @year
       end
 
       get '/' do
@@ -67,7 +70,7 @@ module ChurchCalendar
         get '/' do
           cal = @calendar
           begin
-            CalendariumRomanum::Month.new(@year, params[:month]).collect do |date|
+            CR::Util::Month.new(@year, params[:month]).collect do |date|
               cal.day date
             end
           rescue RangeError
@@ -81,7 +84,7 @@ module ChurchCalendar
         end
         get '/:day' do
           day = Date.new @year, params[:month], params[:day]
-          calendar = CalendariumRomanum::Calendar.for_day day
+          calendar = CR::Calendar.for_day day
           year = @calendar.year
 
           cal_day = calendar.day @year, params[:month], params[:day]

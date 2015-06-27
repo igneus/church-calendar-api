@@ -4,7 +4,7 @@ require 'json'
 
 # adds common path elements at the beginning
 def api_path(path)
-  '/v1' + path
+  '/v0' + path
 end
 
 def dejson(str)
@@ -60,9 +60,32 @@ describe ChurchCalendar::API do
         end
 
         it 'has celebrations' do
-          skip
-          @r['celebrations'].must_be_kind_of Array
+          c = @r['celebrations']
+          c.must_be_kind_of Array
+          c.size.must_equal 1
+
+          c[0]['colour'].must_equal 'green'
+
+          c[0]['rank'].must_equal 'ferial'
         end
+
+        it 'has weekday' do
+          # of course this can be obtained from the date, but
+          # user-readability is a value
+          @r['weekday'].must_equal 'friday'
+        end
+      end
+    end
+
+    describe 'invalid date' do
+      it 'invalid month returns bad request' do
+        get api_path '/2015/13/1'
+        last_response.status.must_equal 400
+      end
+
+      it 'invalid year (too old) returns bad request' do
+        get api_path '/1950/12/1'
+        last_response.status.must_equal 400
       end
     end
   end

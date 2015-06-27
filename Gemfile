@@ -12,6 +12,10 @@ gem 'log4r'
 group :development do
   gem "guard"
   gem "guard-rack"
+
+  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
 end
 
 group :testing do

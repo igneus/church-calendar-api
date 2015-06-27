@@ -1,11 +1,17 @@
+body { width: 800px; margin: 0 auto 0 auto; }
+
 td { vertical-align: top; }
 
 .tar { text-align: right; }
 
 .tt { font-family: monospace; }
 
+.uri { font-family: monospace; background-color: #ccf; padding: 5px; }
+
 .celebration { border-radius: 2px; margin: 3px; }
 .red { background-color: #f33; }
 .green { background-color: #cfc; }
 .white { background-color: #fff; }
 .violet { background-color: violet; }
+
+.section { border: 1px solid #ccc; padding: 5px 15px; margin-bottom: 20px; }

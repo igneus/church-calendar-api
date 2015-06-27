@@ -30,17 +30,13 @@ module ChurchCalendar
       end
     end
 
-    segment '/calendar' do
-
-      desc 'Human-readable specification of the calendar provided'
-      get 'spec' do
-        "Roman Catholic general liturgical calendar,\npromulgated by MP Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).\nImplementation incomplete and buggy."
-      end
-
-      desc 'Year of the calendar\'s promulgation.'
-      get 'promulgated' do
-        CALENDAR_START
-      end
+    desc 'Human-readable specification of the calendar provided'
+    get '/calendar' do
+      {
+       title: 'Roman Catholic general liturgical calendar',
+       desc: "promulgated by MP Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).\nImplementation incomplete and buggy.",
+       promulgated: CALENDAR_START
+      }
     end
 
     get 'today' do
@@ -57,18 +53,28 @@ module ChurchCalendar
         @calendar = CalendariumRomanum::Calendar.new @year
       end
 
-      get 'lectionary' do
-        @calendar.lectionary
-      end
-
-      get 'ferial_lectionary' do
-        @calendar.ferial_lectionary
+      get '/' do
+        {
+         lectionary: @calendar.lectionary,
+         ferial_lectionary: @calendar.ferial_lectionary
+        }
       end
 
       params do
         requires :month, type: Integer, values: 1..12
       end
       segment '/:month' do
+        get '/' do
+          cal = @calendar
+          begin
+            CalendariumRomanum::Month.new(@year, params[:month]).collect do |date|
+              cal.day date
+            end
+          rescue RangeError
+            cal = @calendar.pred
+            retry
+          end
+        end
 
         params do
           requires :day, type: Integer, values: 1..31

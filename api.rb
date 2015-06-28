@@ -26,6 +26,9 @@ module ChurchCalendar
     # (of the calendar system, not of any particular sanctorale data set)
     CALENDAR_START = 1969
 
+    # path to the file describing available sanctorale datasets
+    CALENDARS_CONFIG = 'config/calendars.yml'
+
     # languages supported
     LANGS = [:en]
 
@@ -57,15 +60,21 @@ module ChurchCalendar
     segment '/:lang' do
 
       resource :calendars do
+        before do
+          @calendars = YAML.load_file(CALENDARS_CONFIG)
+        end
+
         get do
-          []
+          @calendars.keys
         end
 
         segment '/:cal' do
           before do
             begin
-              sanctorale_files = File.join(File.dirname(__FILE__), 'data', YAML.load_file('config/calendars.yml')[params[:cal]])
-              @factory = CalendarFactory.new sanctorale_files
+              sanctorale_files = @calendars[params[:cal]].collect do |f|
+                File.join(File.dirname(__FILE__), 'data', f)
+              end
+              @factory = CalendarFactory.new *sanctorale_files
             rescue Errno::ENOENT
               error! "Requested calendar '#{params[:cal]}' not found.", 404
             end

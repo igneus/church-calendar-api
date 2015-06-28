@@ -27,6 +27,14 @@ describe ChurchCalendar::API do
     end
   end
 
+  describe '/calendars' do
+    it 'returns list of calendars available' do
+      get '/api/v0/en/calendars'
+      last_response.must_be :ok?
+      dejson(last_response.body).must_equal ['default']
+    end
+  end
+
   describe '/' do
     it 'returns object describing the calendar' do
       get api_path '/'

@@ -71,8 +71,8 @@ module ChurchCalendar
             end
           end
 
-          desc 'Human-readable specification of the calendar provided'
-          get '/calendar' do
+          desc 'Human-readable description of the calendar provided'
+          get do
             {
              title: 'Roman Catholic general liturgical calendar',
              desc: "promulgated by MP Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).\nImplementation incomplete and buggy.",

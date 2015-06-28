@@ -27,9 +27,9 @@ describe ChurchCalendar::API do
     end
   end
 
-  describe '/calendar' do
+  describe '/' do
     it 'returns object describing the calendar' do
-      get api_path '/calendar'
+      get api_path '/'
       last_response.must_be :ok?
 
       r = dejson(last_response.body)

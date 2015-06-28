@@ -3,8 +3,8 @@ require_relative 'spec_helper'
 require 'json'
 
 # adds common path elements at the beginning
-def api_path(path, lang=:en)
-  "/v0/#{lang}/" + path
+def api_path(path, lang=:en, cal='/calendars/default')
+  "/api/v0/#{lang}#{cal}" + path
 end
 
 def dejson(str)
@@ -15,8 +15,13 @@ end
 describe ChurchCalendar::API do
 
   describe 'language' do
+    it 'supported language is ok' do
+      get '/api/v0/en/calendars/default/today'
+      last_response.must_be :ok?
+    end
+
     it 'unsupported language results in an error' do
-      get '/v0/xx/today'
+      get '/api/v0/xx/calendars/default/today'
       last_response.wont_be :ok?
       last_response.status.must_equal 400
     end
@@ -126,6 +131,36 @@ describe ChurchCalendar::API do
         @r[0]['season'].must_equal 'ordinary'
         @r[-1]['date'].must_equal '2015-06-30'
       end
+    end
+  end
+
+  describe 'requests not qualified by calendar redirect to default calendar' do
+    it '/today' do
+      get '/api/v0/en/today'
+      follow_redirect!
+      last_request.url.must_equal 'http://example.org/api/v0/en/calendars/default/today'
+      last_response.must_be :ok?
+    end
+
+    it '/year' do
+      get '/api/v0/en/2014'
+      follow_redirect!
+      last_request.url.must_equal 'http://example.org/api/v0/en/calendars/default/2014'
+      last_response.must_be :ok?
+    end
+
+    it '/year/month' do
+      get '/api/v0/en/2014/5'
+      follow_redirect!
+      last_request.url.must_equal 'http://example.org/api/v0/en/calendars/default/2014/5'
+      last_response.must_be :ok?
+    end
+
+    it '/year/month/day' do
+      get '/api/v0/en/2014/5/5'
+      follow_redirect!
+      last_request.url.must_equal 'http://example.org/api/v0/en/calendars/default/2014/5/5'
+      last_response.must_be :ok?
     end
   end
 end

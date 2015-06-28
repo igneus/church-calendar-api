@@ -18,6 +18,9 @@ module ChurchCalendar
     # (of the calendar system, not of any particular sanctorale data set)
     CALENDAR_START = 1969
 
+    # languages supported
+    LANGS = [:en]
+
     helpers do
       def get_year(s)
         if s == 'current'
@@ -36,70 +39,75 @@ module ChurchCalendar
       end
     end
 
-    before do
-      sanctorale_file = ENV['CALENDAR_DATAFILE']
-      if sanctorale_file.nil? || sanctorale_file.empty?
-        sanctorale_file = File.join(File.dirname(__FILE__), 'data', YAML.load_file('config/calendars.yml')['default'][0])
-      end
-      @factory = CalendarFactory.new sanctorale_file
+    params do
+      requires :lang, type: Symbol, values: LANGS
     end
-
-    desc 'Human-readable specification of the calendar provided'
-    get '/calendar' do
-      {
-       title: 'Roman Catholic general liturgical calendar',
-       desc: "promulgated by MP Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).\nImplementation incomplete and buggy.",
-       promulgated: CALENDAR_START
-      }
-    end
-
-    get 'today' do
-      day = Date.today
-      calendar = @factory.for_day day
-
-      cal_day = calendar.day day
-      present cal_day, with: ChurchCalendar::Day
-    end
-
-    segment '/:year' do
+    segment '/:lang' do
       before do
-        @year = get_year params[:year]
-        @calendar = @factory.for_year @year
+        sanctorale_file = ENV['CALENDAR_DATAFILE']
+        if sanctorale_file.nil? || sanctorale_file.empty?
+          sanctorale_file = File.join(File.dirname(__FILE__), 'data', YAML.load_file('config/calendars.yml')['default'][0])
+        end
+        @factory = CalendarFactory.new sanctorale_file
       end
 
-      get do
+      desc 'Human-readable specification of the calendar provided'
+      get '/calendar' do
         {
-         lectionary: @calendar.lectionary,
-         ferial_lectionary: @calendar.ferial_lectionary
+         title: 'Roman Catholic general liturgical calendar',
+         desc: "promulgated by MP Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).\nImplementation incomplete and buggy.",
+         promulgated: CALENDAR_START
         }
       end
 
-      params do
-        requires :month, type: Integer, values: 1..12
+      get 'today' do
+        day = Date.today
+        calendar = @factory.for_day day
+
+        cal_day = calendar.day day
+        present cal_day, with: ChurchCalendar::Day
       end
-      segment '/:month' do
+
+      segment '/:year' do
+        before do
+          @year = get_year params[:year]
+          @calendar = @factory.for_year @year
+        end
+
         get do
-          cal = @calendar
-          begin
-            CR::Util::Month.new(@year, params[:month]).collect do |date|
-              cal.day date
-            end
-          rescue RangeError
-            cal = @calendar.pred
-            retry
-          end
+          {
+           lectionary: @calendar.lectionary,
+           ferial_lectionary: @calendar.ferial_lectionary
+          }
         end
 
         params do
-          requires :day, type: Integer, values: 1..31
+          requires :month, type: Integer, values: 1..12
         end
-        get '/:day' do
-          day = Date.new @year, params[:month], params[:day]
-          calendar = @factory.for_day day
-          year = @calendar.year
+        segment '/:month' do
+          get do
+            cal = @calendar
+            begin
+              CR::Util::Month.new(@year, params[:month]).collect do |date|
+                cal.day date
+              end
+            rescue RangeError
+              cal = @calendar.pred
+              retry
+            end
+          end
 
-          cal_day = calendar.day @year, params[:month], params[:day]
-          present cal_day, with: ChurchCalendar::Day
+          params do
+            requires :day, type: Integer, values: 1..31
+          end
+          get '/:day' do
+            day = Date.new @year, params[:month], params[:day]
+            calendar = @factory.for_day day
+            year = @calendar.year
+
+            cal_day = calendar.day @year, params[:month], params[:day]
+            present cal_day, with: ChurchCalendar::Day
+          end
         end
       end
     end

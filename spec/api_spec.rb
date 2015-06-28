@@ -3,8 +3,8 @@ require_relative 'spec_helper'
 require 'json'
 
 # adds common path elements at the beginning
-def api_path(path)
-  '/v0' + path
+def api_path(path, lang=:en)
+  "/v0/#{lang}/" + path
 end
 
 def dejson(str)
@@ -13,6 +13,14 @@ end
 
 # the API tested using Rack::Test
 describe ChurchCalendar::API do
+
+  describe 'language' do
+    it 'unsupported language results in an error' do
+      get '/v0/xx/today'
+      last_response.wont_be :ok?
+      last_response.status.must_equal 400
+    end
+  end
 
   describe '/calendar' do
     it 'returns object describing the calendar' do

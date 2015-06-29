@@ -47,7 +47,7 @@ module ChurchCalendar
 
       def validate_year!(year)
         if year < CALENDAR_START
-          error! "Bad Request: The calendar was promulgated in #{CALENDAR_START}, #{year} is invalid year", 400
+          error! "The calendar was promulgated in #{CALENDAR_START}, #{year} is invalid year", 400
         end
       end
 

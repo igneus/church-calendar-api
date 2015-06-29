@@ -1,11 +1,7 @@
-.tt { font-family: monospace; }
-
-.uri { font-family: monospace; background-color: #ccf; padding: 5px; }
-
-.celebration { border-radius: 2px; margin: 3px; }
+.celebration { display: inline-block; border-radius: 2px; margin: 3px; width: 1em; height: 1em; }
 .red { background-color: #f33; }
-.green { background-color: #cfc; }
-.white { background-color: #fff; }
+.green { background-color: #3c3; }
+.white { background-color: #fff; border: 1px solid #ccc; }
 .violet { background-color: violet; }
 
 .section { border: 1px solid #ccc; padding: 5px 15px; margin-bottom: 20px; }

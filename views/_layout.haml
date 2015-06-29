@@ -18,16 +18,17 @@
     %link{rel: 'stylesheet', type: 'text/css', href: '/style.css'}
 
   %body
-    %nav.navbar.navbar-inverse
+    %nav.navbar.navbar-default
       .container
-        .navbar
-          %ul.nav.navbar-nav
-            %li
-              %a{href: '/'} Home
-            %li
-              %a{href: '/browse'} Browse Calendar
-            %li
-              %a{href: '/api-doc'} API Documentation
+        %ul.nav.navbar-nav
+          %li
+            %a{href: '/'} Home
+          %li
+            %a{href: '/browse'} Browse Calendar
+          %li
+            %a{href: '/api-doc'} API Documentation
+          %li
+            %a{href: 'https://github.com/igneus/church-calendar-api'} Github
 
     .container
       = yield

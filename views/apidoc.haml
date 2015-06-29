@@ -1,4 +1,5 @@
-%h1 API Documentation
+.page-header
+  %h1 API Documentation
 
 %p
   The Church Calendar API provides access to calendar data
@@ -7,20 +8,24 @@
   You may explore the API by following the links bellow and experimenting
   with the URIs.
 
-%h2 API version
+%h2 Specify API Version
 
 %p
-  API version must be specified at the beginning of the request path
-  %span.tt /api/VERSION/LANG
+  API version must be specified at the beginning of each request path
+  %code /api/:version/:lang
   \- right now the API only has version 0 and language English:
-  %span.tt /api/v0/en
+  %code /api/v0/en
+
+%p
+  In the following examples this common beginning is omitted.
 
 %h2 Calendar Metadata
 
-.section
-  %p.uri
-    %a{href: '/api/v0/en/calendar'} /calendar
-
+.panel.panel-default
+  .panel-heading
+    %b
+      %a{href: '/api/v0/en/calendar'} /calendar
+  .panel-body
     %p
       Fetches description of the queried calendar. Important is the year of
       promulgation. Requests for dates older than the year of promulgation
@@ -28,10 +33,11 @@
 
 %h2 Calendar Data
 
-.section
-  %p.uri
-    %a{href: '/api/v0/en/today'} /today
-
+.panel.panel-default
+  .panel-heading
+    %b
+      %a{href: '/api/v0/en/today'} /today
+  .panel-body
     %p
       Returns calendar entry for the current day. See explanation below.
 
@@ -49,73 +55,114 @@
             "weekday":"saturday"
           }
 
-%h3 Day Entry
-
-%ul
-  %li date: ISO date
-  %li season: ordinary/advent/christmas/lent/easter
-  %li
-    season_week: ordinal number of the season's week
-    (the same you will find in liturgical books for the given day)
-  %li
-    weekday: name of the weekday, lowercased, just for human-readability -
-    of course you could compute it from the date
-  %li celebrations: array of alternative celebrations for the day
-
-%h3 Celebration Entry
-
-%ul
-  %li title: name of the celebration, may be empty
-  %li colour: green/violet/white/red
-  %li rank: textual description of celebration rank
-  %li
-    rank_num: celebration rank as number.
-    The lower number, the higher priority.
-    Numbers correspond with section numbers in the
-    %a{href: 'http://www.catholicliturgy.com/index.cfm/fuseaction/documenttext/index/2/subindex/38/contentindex/104/start/97'} Table of Liturgical Days.
-
-.section
-  %p.uri
-    %a{href: '/api/v0/en/2015/6/27'} /:year/:month/:day
+.panel.panel-default
+  .panel-heading
+    %b
+      %a{href: '/api/v0/en/2015/6/27'} /:year/:month/:day
     %br
     %a{href: '/api/v0/en/2015/6/27'} /2015/6/27
     %br
     %a{href: '/api/v0/en/1994/9/1'} /1994/9/1
     or
     %a{href: '/api/v0/en/1994/09/01'} /1994/09/01
+  .panel-body
+    %p
+      Returns Day entry for the specified day.
 
-  %p
-    Returns Day entry for the specified day.
-
-.section
-  %p.uri
-    %a{href: '/api/v0/en/2015/6'} /:year/:month
+.panel.panel-default
+  .panel-heading
+    %b
+      %a{href: '/api/v0/en/2015/6'} /:year/:month
     %br
     %a{href: '/api/v0/en/2015/6'} /2015/6
+  .panel-body
+    %p
+      Returns an array of entries for all days of the specified month
 
-  %p
-    Returns an array of entries for all days of the specified month
-
-.section
-  %p.uri
-    %a{href: '/api/v0/en/2015'} /:year
+.panel.panel-default
+  .panel-heading
+    %b
+      %a{href: '/api/v0/en/2015'} /:year
     %br
     %a{href: '/api/v0/en/2015'} /2015
+  .panel-body
+    %pre
+      {"lectionary":"C","ferial_lectionary":2}
 
-  %pre
-    {"lectionary":"C","ferial_lectionary":2}
+    %p
+      Returns the year's common "liturgical setup".
 
-  %p
-    Returns the year's common "liturgical setup".
+    .alert.alert-warning
+      %strong IMPORTANT:
+      The way this endpoint works might not be obvious
+      at the first glance.
+      The problem is that the civil and Catholic liturgical year do not match.
+      A liturgical year begins in November or December with the 1st Sunday of Advent.
+      Thus
+      %code /api/v0/en/2015
+      returns information concerning the liturgical year 2015-2016
+      and if you want to know which lectionary cycle is in use in June 2015,
+      you have to call
+      %code /api/v0/en/2014
 
-  %p
-    IMPORTANT: The way this endpoint works might not be obvious
-    at the first glance.
-    The problem is that the civil and Catholic liturgical year do not match.
-    A liturgical year begins in November or December with the 1st Sunday of Advent.
-    Thus
-    %span.tt /api/v0/en/2015
-    returns information concerning the liturgical year 2015-2016
-    and if you want to know which lectionary cycle is in use in June 2015,
-    you have to call
-    %span.tt /api/v0/en/2014
+%h2 Data Structures
+
+The API mostly returns representations of liturgical days.
+On each liturgical day one or more celebrations occur.
+
+%h3#day-struct Liturgical Day
+
+%pre
+  = preserve do
+    :escaped
+      {
+        "date":"2015-06-27",
+        "season":"ordinary",
+        "season_week":12,
+        "celebrations":[
+          {"title":"","colour":"green","rank":"ferial","rank_num":3.13},
+          {"title":"Saint Cyril of Alexandria, bishop and doctor","colour":"white","rank":"optional memorial","rank_num":3.12}
+        ],
+        "weekday":"saturday"
+      }
+
+%ul
+  %li
+    %b date:
+    ISO date
+  %li
+    %b season:
+    ordinary/advent/christmas/lent/easter
+  %li
+    %b season_week:
+    ordinal number of the season's week
+    (the same you will find in liturgical books for the given day)
+  %li
+    %b weekday
+    name of the weekday, lowercased, just for human-readability -
+    of course you could compute it from the date
+  %li
+    %b celebrations
+    array of alternative celebrations for the day
+
+%h3#celebration-struct Celebration
+
+%pre
+  {"title":"Saint Cyril of Alexandria, bishop and doctor","colour":"white","rank":"optional memorial","rank_num":3.12}
+
+%ul
+  %li
+    %b title:
+    name of the celebration, may be empty
+  %li
+    %b colour:
+    green/violet/white/red
+  %li
+    %b rank:
+    textual description of celebration rank
+  %li
+    %b rank_num:
+    celebration rank as number.
+    The lower number, the higher priority.
+    Numbers correspond with section numbers in the
+    %a{href: 'http://www.catholicliturgy.com/index.cfm/fuseaction/documenttext/index/2/subindex/38/contentindex/104/start/97'} Table of Liturgical Days.

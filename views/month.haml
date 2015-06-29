@@ -1,24 +1,27 @@
-%h1 Browse Church Calendar
+.page-header
+  %h1 Browse Church Calendar
 
-%p
-  go to:
-  - if month > 1
-    %a{href: "/browse/#{year}/#{month-1}"} previous
-  - 1.upto(12) do |i|
-    - if i == month
-      %strong= i
-    - else
-      %a{href: "/browse/#{year}/#{i}"}= i
-  - if month < 12
-    %a{href: "/browse/#{year}/#{month+1}"} next
+%nav
+  %ul.pagination
+    - if month > 1
+      %li
+        %a{href: "/browse/#{year}/#{month-1}"} &laquo;
+    - 1.upto(12) do |i|
+      %li{class: (month == i ? 'active' : nil)}
+        %a{href: "/browse/#{year}/#{i}"}= i
+    - if month < 12
+      %li
+        %a{href: "/browse/#{year}/#{month+1}"} &raquo;
 
 %h2= "#{year} / #{month}"
 
-%table{border: 1}
+%table.table.table-striped
   - entries.each do |d|
     %tr
       %td.tar= d.date.day
       %td= format_weekday d.weekday
       %td
         - d.celebrations.each do |c|
-          %div{class: "celebration #{c.colour}"}= celebration_text d, c
+          %div
+            %span{class: "celebration #{c.colour}"} &nbsp;
+            = celebration_text d, c

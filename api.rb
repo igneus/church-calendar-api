@@ -133,7 +133,12 @@ module ChurchCalendar
                 requires :day, type: Integer, values: 1..31
               end
               get '/:day' do
-                day = Date.new @year, params[:month], params[:day]
+                begin
+                  day = Date.new @year, params[:month], params[:day]
+                rescue ArgumentError
+                  # year and month is already validated
+                  error! 'day does not have a valid value', 400
+                end
                 calendar = @factory.for_day day
                 year = @calendar.year
 

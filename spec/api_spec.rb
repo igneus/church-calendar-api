@@ -159,6 +159,16 @@ describe ChurchCalendar::API do
         get api_path '/1950/12/1'
         last_response.status.must_equal 400
       end
+
+      it 'invalid day - generally' do
+        get api_path '/2015/2/39'
+        last_response.status.must_equal 400
+      end
+
+      it 'invalid day - for the month specifically' do
+        get api_path '/2015/2/29'
+        last_response.status.must_equal 400
+      end
     end
   end
 

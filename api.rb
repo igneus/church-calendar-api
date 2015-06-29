@@ -6,6 +6,7 @@ require 'calendarium-romanum'
 require_relative 'app/entities/celebration.rb'
 require_relative 'app/entities/day.rb'
 require_relative 'app/calendarfactory.rb'
+require_relative 'app/jsonprettyprinter.rb'
 
 CR = CalendariumRomanum
 
@@ -15,9 +16,7 @@ module ChurchCalendar
     version API_VERSION, using: :path
 
     format :json
-    formatter :json, Proc.new {|obj,env|
-      JSON.pretty_generate(JSON.parse(obj.to_json))
-    }
+    formatter :json, JSONPrettyPrinter
 
     # to make paths consistent between testing and development/production,
     # where the app is mounted under /api

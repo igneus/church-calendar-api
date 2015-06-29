@@ -117,9 +117,10 @@ module ChurchCalendar
               get do
                 cal = @calendar
                 begin
-                  CR::Util::Month.new(@year, params[:month]).collect do |date|
+                  days = CR::Util::Month.new(@year, params[:month]).collect do |date|
                     cal.day date
                   end
+                  present days, with: ChurchCalendar::Day
                 rescue RangeError
                   cal = @calendar.pred
                   retry

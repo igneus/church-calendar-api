@@ -11,6 +11,28 @@ def dejson(str)
   JSON.load str
 end
 
+# shared examples describing day entry.
+# They expect a method day_entry returning a described day entry.
+module DayEntryFormatExamples
+  extend Minitest::Spec::DSL
+
+  it 'contains expected fields in expected format' do
+    day_entry['date'].must_match /^\d{4}-\d{2}-\d{2}$/
+    day_entry['season'].must_match /^\w+$/
+    day_entry['season_week'].must_be_kind_of Integer
+    day_entry['weekday'].must_match /^\w+$/
+
+    day_entry['celebrations'].must_be_kind_of Array
+    day_entry['celebrations'].wont_be :empty?
+
+    c = day_entry['celebrations'][0]
+    c['title'].must_be_kind_of String
+    c['colour'].must_match /^\w+$/
+    c['rank'].must_match /^[\w\s]+$/
+    c['rank_num'].must_be_kind_of Float
+  end
+end
+
 # the API tested using Rack::Test
 describe ChurchCalendar::API do
 
@@ -48,11 +70,20 @@ describe ChurchCalendar::API do
   end
 
   describe '/today' do
-    it 'returns a calendar entry' do
+    before do
       get api_path '/today'
+      @r = dejson last_response.body
+    end
+
+    def day_entry
+      @r
+    end
+
+    include DayEntryFormatExamples
+
+    it 'returns a calendar entry' do
       last_response.must_be :ok?
-      r = dejson last_response.body
-      r['date'].must_be_kind_of String
+      @r['date'].must_be_kind_of String
     end
   end
 
@@ -71,6 +102,12 @@ describe ChurchCalendar::API do
           get api_path '/2015/6/26'
           @r = dejson last_response.body
         end
+
+        def day_entry
+          @r
+        end
+
+        include DayEntryFormatExamples
 
         it 'has date' do
           @r['date'].must_equal '2015-06-26'
@@ -131,6 +168,12 @@ describe ChurchCalendar::API do
         get api_path '/2015/6'
         @r = dejson last_response.body
       end
+
+      def day_entry
+        @r.first
+      end
+
+      include DayEntryFormatExamples
 
       it 'returns a list of calendar entries' do
         @r.must_be_kind_of Array

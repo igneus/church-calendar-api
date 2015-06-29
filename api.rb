@@ -15,6 +15,9 @@ module ChurchCalendar
     version API_VERSION, using: :path
 
     format :json
+    formatter :json, Proc.new {|obj,env|
+      JSON.pretty_generate(JSON.parse(obj.to_json))
+    }
 
     # to make paths consistent between testing and development/production,
     # where the app is mounted under /api

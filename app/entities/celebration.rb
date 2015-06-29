@@ -4,6 +4,8 @@ module ChurchCalendar
     expose :rank
     expose :rank_num
 
+    expose :text, if: lambda { |status, options| options[:compose_text] }
+
     private
 
     def rank
@@ -12,6 +14,10 @@ module ChurchCalendar
 
     def rank_num
       object.rank.priority
+    end
+
+    def text
+      'fake text'
     end
   end
 end

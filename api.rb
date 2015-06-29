@@ -58,9 +58,9 @@ module ChurchCalendar
 
     params do
       requires :lang, type: Symbol, values: LANGS
+      optional :compose_text, type: Boolean, default: false
     end
     segment '/:lang' do
-
       resource :calendars do
         before do
           @calendars = YAML.load_file(CALENDARS_CONFIG)
@@ -96,7 +96,7 @@ module ChurchCalendar
             calendar = @factory.for_day day
 
             cal_day = calendar.day day
-            present cal_day, with: ChurchCalendar::Day
+            present cal_day, with: ChurchCalendar::Day, compose_text: params[:compose_text]
           end
 
           segment '/:year' do
@@ -122,7 +122,7 @@ module ChurchCalendar
                   days = CR::Util::Month.new(@year, params[:month]).collect do |date|
                     cal.day date
                   end
-                  present days, with: ChurchCalendar::Day
+                  present days, with: ChurchCalendar::Day, compose_text: params[:compose_text]
                 rescue RangeError
                   cal = @calendar.pred
                   retry
@@ -138,7 +138,7 @@ module ChurchCalendar
                 year = @calendar.year
 
                 cal_day = calendar.day @year, params[:month], params[:day]
-                present cal_day, with: ChurchCalendar::Day
+                present cal_day, with: ChurchCalendar::Day, compose_text: params[:compose_text]
               end
             end
           end

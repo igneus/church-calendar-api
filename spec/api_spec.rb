@@ -147,6 +147,19 @@ describe ChurchCalendar::API do
           c[0]['title'].must_equal 'Saint Barnabas the Apostle'
         end
       end
+
+      describe 'compose_text' do
+        it 'adds a new field' do
+          get api_path '/today?compose_text=true'
+          r = dejson last_response.body
+          r['celebrations'][0]['text'].must_be_kind_of String
+        end
+
+        it 'simple ferial' do
+          get api_path '/2015/6/26?compose_text=true'
+          last_response.must_equal 'Friday of the 12th week in Ordinary Time'
+        end
+      end
     end
 
     describe 'invalid date' do

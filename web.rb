@@ -51,7 +51,7 @@ module ChurchCalendar
           entries << @cal.day(date)
         rescue RangeError
           if month >= 11
-            prepare_calendar(date)
+            prepare_calendar(date, cal)
             retry
           end
         end

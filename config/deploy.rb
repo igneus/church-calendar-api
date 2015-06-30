@@ -1,6 +1,6 @@
 set :application, 'church-calendar-api'
 set :repo_url, 'https://github.com/igneus/church-calendar-api.git'
-set :branch, 'master'
+set :branch, 'calapi.inadiutorium.cz'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
@@ -11,7 +11,7 @@ set :branch, 'master'
 # set :log_level, :debug
 # set :pty, true
 
-set :linked_files, %w{config/calendars.yml}
+# set :linked_files, %w{config/calendars.yml}
 set :linked_dirs, %w{tmp data}
 
 # set :default_env, { var: 'value' }

@@ -64,8 +64,8 @@ describe ChurchCalendar::API do
 
       r = dejson(last_response.body)
       r.must_be_kind_of Hash
-      r['promulgated'].must_equal 1969
-      r['title'].must_include 'calendar'
+      r['system']['promulgated'].must_equal 1969
+      r['sanctorale']['title'].must_include 'Calendar'
     end
   end
 

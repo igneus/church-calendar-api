@@ -6,7 +6,9 @@ require 'calendarium-romanum'
 require_relative 'app/entities/celebration.rb'
 require_relative 'app/entities/day.rb'
 require_relative 'app/calendarfactory.rb'
+require_relative 'app/sanctoralerepository.rb'
 require_relative 'app/jsonprettyprinter.rb'
+require_relative 'app/churchcalendar.rb'
 
 CR = CalendariumRomanum
 
@@ -23,16 +25,6 @@ module ChurchCalendar
     if ENV['RACK_ENV'] == 'test'
       prefix :api
     end
-
-    # year of promulgation of this calendar
-    # (of the calendar system, not of any particular sanctorale data set)
-    CALENDAR_START = 1969
-
-    # path to the file describing available sanctorale datasets
-    CALENDARS_CONFIG = 'config/calendars.yml'
-
-    # languages supported
-    LANGS = [:en]
 
     helpers do
       def get_year(s)
@@ -63,21 +55,18 @@ module ChurchCalendar
 
       resource :calendars do
         before do
-          @calendars = YAML.load_file(CALENDARS_CONFIG)
+          @repo = ChurchCalendar.sanctorale_repository
         end
 
         get do
-          @calendars.keys
+          @repo.keys
         end
 
         segment '/:cal' do
           before do
             begin
-              sanctorale_files = @calendars[params[:cal]].collect do |f|
-                File.join(File.dirname(__FILE__), 'data', f)
-              end
-              @factory = CalendarFactory.new *sanctorale_files
-            rescue Errno::ENOENT
+              @factory = @repo.get_calendar_factory params[:cal]
+            rescue KeyError
               error! "Requested calendar '#{params[:cal]}' not found.", 404
             end
           end
@@ -85,9 +74,8 @@ module ChurchCalendar
           desc 'Human-readable description of the calendar provided'
           get do
             {
-             title: 'Roman Catholic general liturgical calendar',
-             desc: "promulgated by MP Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).\nImplementation incomplete and buggy.",
-             promulgated: CALENDAR_START
+             system: CALENDAR_SYSTEM_DESC,
+             sanctorale: @repo.metadata(params[:cal])
             }
           end
 

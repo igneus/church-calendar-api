@@ -19,7 +19,7 @@
 
 %table.table.table-striped
   - entries.each do |d|
-    %tr
+    %tr{'id' => d.date.day}
       %td.tar= d.date.day
       %td= format_weekday d.weekday
       %td

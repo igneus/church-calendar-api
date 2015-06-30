@@ -17,5 +17,69 @@ czech:
   files:
     - czech-cs.txt
 
+czech-pha:
+  title: kalendář pražské arcidiecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-cechy-cs.txt
+    - czech-praha-cs.txt
+
+czech-ltm:
+  title: kalendář litoměřické diecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-cechy-cs.txt
+    - czech-litomerice-cs.txt
+
+czech-hk:
+  title: kalendář královéhradecké diecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-cechy-cs.txt
+    - czech-hradec-cs.txt
+
+czech-cb:
+  title: kalendář českobudějovické diecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-cechy-cs.txt
+    - czech-budejovice-cs.txt
+
+czech-plz:
+  title: kalendář plzeňské diecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-cechy-cs.txt
+    - czech-plzen-cs.txt
+
+czech-olm:
+  title: kalendář olomoucké arcidiecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-morava-cs.txt
+    - czech-olomouc-cs.txt
+
+czech-brn:
+  title: kalendář brněnské diecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-morava-cs.txt
+    - czech-brno-cs.txt
+
+czech-oo:
+  title: kalendář ostravsko-opavské diecéze
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-morava-cs.txt
+    - czech-ostrava-cs.txt
+
 default:
   <<: *default

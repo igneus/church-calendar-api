@@ -1,7 +1,17 @@
+/* liturgical colour marks */
 .celebration { display: inline-block; border-radius: 2px; margin: 3px; width: 1em; height: 1em; }
 .red { background-color: #f33; }
 .green { background-color: #3c3; }
 .white { background-color: #fff; border: 1px solid #ccc; }
 .violet { background-color: violet; }
 
-.section { border: 1px solid #ccc; padding: 5px 15px; margin-bottom: 20px; }
+/* circular buttons */
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}

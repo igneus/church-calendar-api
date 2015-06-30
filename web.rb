@@ -22,7 +22,8 @@ module ChurchCalendar
     get '/browse' do
       start_year = Time.now.year - 5
       end_year = start_year + 10
-      render :browse, locals: {start_year: start_year, end_year: end_year}
+      l = {start_year: start_year, end_year: end_year, today: Date.today}
+      render :browse, locals: l
     end
 
     get '/browse/:year/:month' do |year, month|

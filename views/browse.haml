@@ -5,4 +5,10 @@
   %p
     %strong= year
     - 1.upto(12) do |month|
-      %a.btn{href: "/browse/#{year}/#{month}"}= month
+      - cls = %w{btn btn-circle}
+      - if year == today.year && month == today.month
+        - cls << 'btn-primary'
+      - else
+        - cls << 'btn-default'
+
+      %a{href: "/browse/#{year}/#{month}", class: cls.join(' ')}= month

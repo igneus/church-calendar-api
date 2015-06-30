@@ -1,11 +1,11 @@
 ---
-default:
+general-en: &default
   title: General Roman Calendar
   language: en
   files:
     - universal-en.txt
 
-latin:
+general-la:
   title: Calendarium Romanum Generale
   language: la
   files:
@@ -16,3 +16,6 @@ czech:
   language: cs
   files:
     - czech-cs.txt
+
+default:
+  <<: *default

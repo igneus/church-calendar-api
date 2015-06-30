@@ -4,3 +4,15 @@ default:
   language: en
   files:
     - universal-en.txt
+
+latin:
+  title: Calendarium Romanum Generale
+  language: la
+  files:
+    - universal-la.txt
+
+czech:
+  title: Český národní kalendář
+  language: cs
+  files:
+    - czech-cs.txt

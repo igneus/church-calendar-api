@@ -35,8 +35,14 @@ module ChurchCalendar
       end
     end
 
-    # metadata for the given calendar
-    def metadata(key)
+    # metadata for the given calendar -
+    # or for all if calendar key not specified
+    def metadata(key=nil)
+      if key.nil?
+        # return Hash {key: metadata(key)}
+        return keys.inject({}) {|memo, (k, v)| memo[k] = metadata k; memo}
+      end
+
       m = @calendars[key].dup
       m.delete 'files'
       return m

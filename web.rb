@@ -20,19 +20,29 @@ module ChurchCalendar
     end
 
     get '/browse' do
+      redirect '/browse/default'
+    end
+
+    get '/browse/:cal' do |cal|
       start_year = Time.now.year - 5
       end_year = start_year + 10
-      l = {start_year: start_year, end_year: end_year, today: Date.today}
+      l = {
+           start_year: start_year,
+           end_year: end_year,
+           today: Date.today,
+           cal: cal,
+           calendars: ChurchCalendar.sanctorale_repository.metadata,
+          }
       render :browse, locals: l
     end
 
-    get '/browse/:year/:month' do |year, month|
+    get '/browse/:cal/:year/:month' do |cal,year, month|
       year = year.to_i
       month = month.to_i
 
       date = Date.new(year, month, 1)
 
-      prepare_calendar(date)
+      prepare_calendar(date, cal)
 
       entries = []
 
@@ -81,9 +91,8 @@ module ChurchCalendar
       return "#{format_weekday day.weekday}, #{ordinal day.season_week} week of #{format_season day.season}"
     end
 
-    def prepare_calendar(date)
+    def prepare_calendar(date, cal)
       repo = ChurchCalendar.sanctorale_repository
-      cal = 'default'
       factory = repo.get_calendar_factory cal
       @cal = factory.for_day date
     end

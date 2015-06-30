@@ -73,6 +73,10 @@ module ChurchCalendar
       render :apidoc
     end
 
+    get '/about' do
+      render :about
+    end
+
 
 
     def ordinal(i)

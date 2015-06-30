@@ -59,7 +59,14 @@ module ChurchCalendar
         date = date.succ
       end until date.month != month
 
-      render :month, locals: {year: year, month: month, entries: entries}
+      l = {
+           year: year,
+           month: month,
+           entries: entries,
+           cal: cal,
+           calendars: ChurchCalendar.sanctorale_repository.metadata,
+          }
+      render :month, locals: l
     end
 
     get '/api-doc' do

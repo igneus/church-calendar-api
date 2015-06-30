@@ -1,17 +1,7 @@
 .page-header
   %h1 Browse Church Calendar
 
-%h2= calendars[cal]['title']
-
-%p
-  .dropdown
-    %button#select-calendar.btn.btn-default.dropdown-toggle{type: 'button', :'data-toggle' => 'dropdown'}
-      Select Calendar
-      %span.caret
-    %ul.dropdown-menu
-      - calendars.each_pair do |key, data|
-        %li
-          %a{href: "/browse/#{key}"}= data['title']
+= render :_calselect, locals: {calendars: calendars, cal: cal}
 
 - start_year.upto(end_year) do |year|
   %p

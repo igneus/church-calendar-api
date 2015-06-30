@@ -1,0 +1,11 @@
+%h2= calendars[cal]['title']
+
+%p
+  .dropdown
+    %button#select-calendar.btn.btn-default.dropdown-toggle{type: 'button', :'data-toggle' => 'dropdown'}
+      Select Calendar
+      %span.caret
+    %ul.dropdown-menu
+      - calendars.each_pair do |key, data|
+        %li
+          %a{href: "/browse/#{key}"}= data['title']

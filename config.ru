@@ -1,3 +1,5 @@
+require 'rack/cors'
+
 require_relative 'api.rb'
 require_relative 'web.rb'
 

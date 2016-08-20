@@ -7,8 +7,7 @@ gem 'rack-cors'
 gem 'scorched'
 gem 'haml'
 
-gem 'log4r'
-gem 'calendarium-romanum', github: 'igneus/calendarium-romanum', ref: '89baf0f'
+gem 'calendarium-romanum'
 
 group :development do
   gem "guard"

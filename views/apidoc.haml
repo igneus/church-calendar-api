@@ -82,7 +82,10 @@
     %a{href: '/api/v0/en/calendars/general-la/today'} /calendars/general-la/today
   .panel-body
     %p
-      Returns calendar entry for the current day. See explanation below.
+      Returns calendar entry for the current day.
+      Don't use this endpoint if you need to serve audience
+      in different timezones or in a single timezone different
+      from the API server's one.
 
     %pre
       = preserve do

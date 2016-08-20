@@ -21,22 +21,11 @@ module ChurchCalendar
     end
 
     def for_year(year)
-      c = CalendariumRomanum::Calendar.new year
-      update c
-      return c
+      CalendariumRomanum::Calendar.new year, @sanctorale
     end
 
     def for_day(date)
-      c = CalendariumRomanum::Calendar.for_day date
-      update c
-      return c
-    end
-
-    private
-
-    # make the Calendar conform to expected setup
-    def update(cal)
-      cal.sanctorale = @sanctorale
+      CalendariumRomanum::Calendar.for_day date, @sanctorale
     end
   end
 end

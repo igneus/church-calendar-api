@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/igneus/calendarium-romanum.git
-  revision: 89baf0f04c55cece9ae95ef8a7d0f937d08d2810
-  ref: 89baf0f
-  specs:
-    calendarium-romanum (0.0.0)
-      i18n
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -21,6 +13,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     blankslate (3.1.3)
     builder (3.2.2)
+    calendarium-romanum (0.0.1)
     capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
@@ -79,7 +72,6 @@ GEM
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    log4r (1.1.10)
     lumberjack (1.0.9)
     method_source (0.8.2)
     minitest (5.7.0)
@@ -142,7 +134,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  calendarium-romanum!
+  calendarium-romanum
   capistrano (~> 3.0.1)
   capistrano-bundler
   capistrano-rvm
@@ -151,7 +143,6 @@ DEPENDENCIES
   guard
   guard-rack
   haml
-  log4r
   minitest
   rack-cors
   rack-test

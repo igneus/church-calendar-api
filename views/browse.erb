@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta content='width: device-width, initial-scale: 1' name='viewport'>
+    <title>Church Calendar API</title>
+    <!-- jquery -->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <!-- bootstrap -->
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' rel='stylesheet'>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="browse.js"></script>
+    <link href='/style.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <nav class='navbar navbar-default'>
+      <div class='container'>
+        <ul class='nav navbar-nav'>
+          <li>
+            <a href='/'>Home</a>
+          </li>
+          <li>
+            <a href='/browse'>Browse Calendar</a>
+          </li>
+          <li>
+            <a href='/api-doc'>API Documentation</a>
+          </li>
+          <li>
+            <a href='/about'>About</a>
+          </li>
+        </ul>
+        <ul class='nav navbar-nav pull-right'>
+          <li>
+            <a href='https://github.com/igneus/church-calendar-api'>Fork me at Github</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class='container'>
+
+      <div class="page-header">
+        <h1>Browse Church Calendar</h1>
+      </div>
+
+      <div ng-app="calendarApp">
+        <div ng-controller="MonthController">
+          <label>
+            Calendar
+            <select ng-model="selectedCalendar" ng-options="c as c for c in calendars"></select>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

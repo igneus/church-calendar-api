@@ -24,9 +24,14 @@ either for development or to make your own public instance of the service:
 
 1. install dependencies using Bundler
    `$ bundle install`
-2. manually install [calendarium-romanum][caro] (once it is released,
-   this step won't be necessary)
-3. start application by `$ rackup`
+2. start application by `$ rackup`
+
+Probably the easiest production deployment is to Heroku.
+The application works as is, you only need to create a new application
+in your Heroku dashboard and push the code.
+
+Anyone intending to run a public instance is kindly asked
+to update contact information displayed on the web app.
 
 ## License
 

@@ -44,11 +44,35 @@
       </div>
 
       <div ng-app="calendarApp">
-        <div ng-controller="MonthController">
+        <div ng-controller="MonthController" ng-cloak>
           <label>
             Calendar
             <select ng-model="selectedCalendar" ng-options="c as c for c in calendars"></select>
           </label>
+
+          <label>
+            Year
+            <input type="number" ng-model="year">
+          </label>
+          <nav>
+            <ul class="pagination">
+              <li ng-repeat="m in months" class="{{ m == month ? 'active' : null }}"><a href ng-click="$parent.month = m">{{ m }}</a></li>
+            </ul>
+          </nav>
+
+          <table class="table table-striped">
+            <tr id="{{ day.date }}" ng-repeat="day in days">
+              <td class="text-right">{{ day.date | date:'d' }}</td>
+              <td class="text-capitalize">{{ day.weekday }}</td>
+              <td>{{ day.title }}</td>
+              <td>
+                <div ng-repeat="celebration in day.celebrations">
+                  <span class="celebration {{ celebration.colour }}">&nbsp;</span>
+                  {{ celebration.title }}, {{ celebration.rank }}
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
 

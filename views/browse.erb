@@ -45,18 +45,23 @@
 
       <div ng-app="calendarApp">
         <div ng-controller="MonthController" ng-cloak>
-          <label>
-            Calendar
-            <select ng-model="selectedCalendar" ng-options="c as c for c in calendars"></select>
-          </label>
+          <div class="form form-inline">
+            <div class="form-group">
+              <label for="calendar">Calendar</label>
+              <select ng-model="selectedCalendar" ng-options="c as c for c in calendars" class="form-control" name="calendar"></select>
+            </div>
 
-          <label>
-            Year
-            <input type="number" ng-model="year">
-          </label>
+            <div class="form-group">
+              <label for="year">Year</label>
+              <input type="number" ng-model="year" min="1969" class="form-control" name="year" style="width: 6em;">
+            </div>
+          </div>
+
           <nav>
             <ul class="pagination">
+              <li><a href ng-click="previousMonth()"><span>&laquo;</span></a></li>
               <li ng-repeat="m in months" class="{{ m == month ? 'active' : null }}"><a href ng-click="$parent.month = m">{{ m }}</a></li>
+              <li><a href ng-click="nextMonth()"><span>&raquo;</span></a></li>
             </ul>
           </nav>
 

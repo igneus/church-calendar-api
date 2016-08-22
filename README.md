@@ -14,7 +14,7 @@ It is queried by HTTP requests where requested resources are described
 by the URL path.
 It responds with JSON documents.
 
-Documentation with examples and live links:
+API documentation with examples and live links:
 http://calapi.inadiutorium.cz/api-doc
 
 ## Installation and running
@@ -33,8 +33,30 @@ in your Heroku dashboard and push the code.
 Anyone intending to run a public instance is kindly asked
 to update contact information displayed on the web app.
 
+## Configuration
+
+### Calendar data
+
+In the [data](/data) directory you will only find data for the
+General Roman Calendar in English.
+More data files (General Roman Calendar in Latin, calendars
+of the dioceses of the Czech Republic), together with a description
+of the data format, can be found in the repository of the
+[calendarium-romanum][caro_data] gem.
+
+In order to add a new calendar:
+
+1. put it's data file(s) in the `data` directory
+2. create a new record in `config/calendars.yml`
+
+For a complete example configuration with several calendars,
+including calendars composed of several "layered" data files,
+see [configuration used at the author's instance of the API][calapicz_config].
+
 ## License
 
 GNU/LGPL 3 or later
 
 [caro]: http://github.com/igneus/calendarium-romanum
+[caro_data]: https://github.com/igneus/calendarium-romanum/tree/master/data
+[calapicz_config]: https://github.com/igneus/church-calendar-api/blob/calapi.inadiutorium.cz/config/calendars.yml

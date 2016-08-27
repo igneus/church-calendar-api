@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
+gem 'calendarium-romanum'
+
 gem 'grape'
 gem 'grape-entity'
 gem 'rack-cors'
+gem 'puma'
 
 gem 'scorched'
 gem 'haml'
-
-gem 'calendarium-romanum'
 
 group :development do
   gem "guard"

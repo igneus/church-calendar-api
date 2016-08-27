@@ -42,7 +42,6 @@ role :web, %w{deploy@inadiutorium.cz}
 
 set :deploy_to, '/var/www/calapi.inadiutorium'
 
-# RVM
-# set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '2.2.2@calapi'      # Defaults to: 'default'
-set :rvm_custom_path, '/home/igneus/.rvm'  # only needed if not detected
+# RBENV
+set :rbenv_type, :user
+set :rbenv_ruby, '2.2.2'

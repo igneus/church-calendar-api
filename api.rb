@@ -1,5 +1,7 @@
 require 'grape'
 require 'grape-entity'
+require 'oj'
+require 'multi_json'
 require 'yaml'
 require 'calendarium-romanum'
 
@@ -7,7 +9,6 @@ require_relative 'app/entities/celebration.rb'
 require_relative 'app/entities/day.rb'
 require_relative 'app/calendarfactory.rb'
 require_relative 'app/sanctoralerepository.rb'
-require_relative 'app/jsonprettyprinter.rb'
 require_relative 'app/churchcalendar.rb'
 
 CR = CalendariumRomanum
@@ -18,7 +19,9 @@ module ChurchCalendar
     version API_VERSION, using: :path
 
     format :json
-    formatter :json, JSONPrettyPrinter
+    content_type :json, 'application/json; charset=utf-8'
+
+    formatter :json, -> (obj, env) { MultiJson.dump(obj, pretty: true) }
 
     # to make paths consistent between testing and development/production,
     # where the app is mounted under /api

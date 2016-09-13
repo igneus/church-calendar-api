@@ -53,7 +53,7 @@ describe ChurchCalendar::API do
     it 'returns list of calendars available' do
       get '/api/v0/en/calendars'
       last_response.must_be :ok?
-      dejson(last_response.body).must_equal ['default']
+      dejson(last_response.body).must_equal ['universal-en', 'default']
     end
   end
 

@@ -5,6 +5,8 @@ gem 'calendarium-romanum'
 gem 'grape'
 gem 'grape-entity'
 gem 'rack-cors'
+gem 'multi_json'
+gem 'oj'
 gem 'puma'
 
 gem 'scorched'

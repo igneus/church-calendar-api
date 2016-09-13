@@ -1,5 +1,5 @@
 ---
-universal-en: &default
+general-en: &default
   title: General Roman Calendar
   language: en
   files:

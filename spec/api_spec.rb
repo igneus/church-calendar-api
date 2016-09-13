@@ -239,4 +239,11 @@ describe ChurchCalendar::API do
       last_response.must_be :ok?
     end
   end
+
+  describe 'unknown route' do
+    it 'is handled properly' do
+      get '/api/unknown_route'
+      last_response.status.must_equal 404
+    end
+  end
 end

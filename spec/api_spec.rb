@@ -53,7 +53,22 @@ describe ChurchCalendar::API do
     it 'returns list of calendars available' do
       get '/api/v0/en/calendars'
       last_response.must_be :ok?
-      dejson(last_response.body).must_equal ['universal-en', 'default']
+      dejson(last_response.body).must_equal ['general-en', 'default']
+    end
+  end
+
+  describe '/calendars/:cal' do
+    it 'returns calendar description' do
+      get '/api/v0/en/calendars/default'
+      last_response.must_be :ok?
+      dejson(last_response.body).must_be_kind_of Hash
+    end
+  end
+
+  describe '/calendars/:cal' do
+    it 'returns calendar description' do
+      get '/api/v0/en/calendars/unknown'
+      last_response.status.must_equal 404
     end
   end
 
@@ -222,6 +237,13 @@ describe ChurchCalendar::API do
       follow_redirect!
       last_request.url.must_equal 'http://example.org/api/v0/en/calendars/default/2014/5/5'
       last_response.must_be :ok?
+    end
+  end
+
+  describe 'unknown route' do
+    it 'is handled properly' do
+      get '/api/unknown_route'
+      last_response.status.must_equal 404
     end
   end
 end

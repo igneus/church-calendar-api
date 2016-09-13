@@ -30,7 +30,10 @@ module ChurchCalendar
     # Array of data files for the given calendar;
     # should be loaded over each other in the given order
     def data_files(key)
-      @calendars[key]['files'].collect do |f|
+      calendar_setup = @calendars[key]
+      raise UnknownCalendarError.new(key) if calendar_setup.nil?
+
+      calendar_setup['files'].collect do |f|
         File.join @path, f
       end
     end
@@ -46,6 +49,12 @@ module ChurchCalendar
       m = @calendars[key].dup
       m.delete 'files'
       return m
+    end
+  end
+
+  class UnknownCalendarError < Grape::Exceptions::Base
+    def initialize(key)
+      super(status: 404, message: "Unknown calendar #{key.inspect}")
     end
   end
 end

@@ -18,6 +18,8 @@ module ChurchCalendar
     version API_VERSION, using: :path
 
     format :json
+    content_type :json, 'application/json; charset=utf-8'
+
     formatter :json, JSONPrettyPrinter
 
     # to make paths consistent between testing and development/production,

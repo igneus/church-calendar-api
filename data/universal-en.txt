@@ -2,10 +2,8 @@
 # source: https://en.wikipedia.org/wiki/General_Roman_Calendar
 
 = 1
-1 s : Octave Day of Christmas,  of Mary, Mother of God
 2 m : Saints Basil the Great and Gregory Nazianzen, bishops and doctors
 3 : The Most Holy Name of Jesus
-6 s : Epiphany
 7 : Saint Raymond of Penyafort, priest
 13 : Saint Hilary of Poitiers, bishop and doctor
 17 m : Saint Anthony of Egypt, abbot
@@ -115,7 +113,7 @@
 16 : Our Lady of Mount Carmel
 20 : Saint Apollinaris
 21 : Saint Lawrence of Brindisi, priest and doctor
-22 m : Saint Mary Magdalene
+22 f : Saint Mary Magdalene
 23 : Saint Birgitta, religious
 24 : Saint Sharbel Makhluf, hermit
 25 f R : Saint James, apostle
@@ -160,7 +158,7 @@
 9 : Saint Peter Claver, priest
 12 : Holy Name of the Blessed Virgin Mary
 13 m : Saint John Chrysostom, bishop and doctor
-14 f R : Triumph of the Holy Cross
+14 f2.5 R : Triumph of the Holy Cross
 15 m : Our Lady of Sorrows
 16 m R : Saints Cornelius, pope, and Cyprian, bishop, martyrs
 17 : Saint Robert Bellarmine, bishop and doctor
@@ -232,7 +230,6 @@
 14 m : Saint John of the Cross, priest and doctor
 21 : Saint Peter Canisius, priest and doctor
 23 : Saint John of Kanty, priest
-25 s : Nativity of the Lord
 26 f R : Saint Stephen, the first martyr
 27 f : Saint John the Apostle and evangelist
 28 f R : Holy Innocents, martyrs

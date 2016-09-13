@@ -77,6 +77,10 @@ module ChurchCalendar
       render :about
     end
 
+    get '/showcase' do
+      render :showcase
+    end
+
 
 
     def ordinal(i)

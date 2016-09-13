@@ -1,6 +1,8 @@
 ---
-default:
+universal-en: &universal
   title: General Roman Calendar
   language: en
   files:
     - universal-en.txt
+default:
+  <<: *universal

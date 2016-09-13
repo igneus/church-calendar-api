@@ -35,7 +35,7 @@
         :escaped
           [
             "default",
-            "general-la",
+            "universal-en",
             "general-en",
             "czech"
           ]
@@ -47,7 +47,7 @@
     %br
     %a{href: '/api/v0/en/calendars/default'} /calendars/default
     %br
-    %a{href: '/api/v0/en/calendars/general-la'} /calendars/general-la
+    %a{href: '/api/v0/en/calendars/universal-en'} /calendars/universal-en
   .panel-body
     %p
       Fetches description of the selected calendar.
@@ -79,7 +79,7 @@
     %b
       %a{href: '/api/v0/en/calendars/default/today'} /calendars/:cal/today
     %br
-    %a{href: '/api/v0/en/calendars/general-la/today'} /calendars/general-la/today
+    %a{href: '/api/v0/en/calendars/universal-en/today'} /calendars/universal-en/today
   .panel-body
     %p
       Returns calendar entry for the current day.
@@ -158,9 +158,9 @@
 .panel.panel-default
   .panel-heading
     %b
-      %a{href: '/api/v0/calendars/default/en/2015'} /calendars/:cal/:year
+      %a{href: '/api/v0/en/calendars/default/2015'} /calendars/:cal/:year
     %br
-    %a{href: '/api/v0/calendars/default/en/2015'} /calendars/default/2015
+    %a{href: '/api/v0/en/calendars/default/2015'} /calendars/default/2015
   .panel-body
     %pre
       {"lectionary":"C","ferial_lectionary":2}

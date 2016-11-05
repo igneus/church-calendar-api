@@ -9,15 +9,14 @@ grape.
 
 ## Explore it on-line
 
-Church Calendar API is a more or less RESTful API.
-It is queried by HTTP requests where requested resources are described
-by the URL path.
-It responds with JSON documents.
+Church Calendar API is a more or less RESTful read-only JSON API.
 
-API documentation with examples and live links:
+API documentation with URI examples and live links to API endpoints:
 http://calapi.inadiutorium.cz/api-doc
 
 ## Installation and running
+
+### Running locally
 
 In case you want to run your own instance of the API,
 either for development or to make your own public instance of the service:
@@ -26,9 +25,17 @@ either for development or to make your own public instance of the service:
    `$ bundle install`
 2. start application by `$ rackup`
 
+### Production deployment
+
 Probably the easiest production deployment is to Heroku.
 The application works as is, you only need to create a new application
 in your Heroku dashboard and push the code.
+
+Typical reasons for running your own instance include:
+
+* availability/reliability requirements (the [reference instance][calapi] is self-hosted by the author and only maintained as free time permits)
+* very high traffic expected
+* custom calendar data that cannot be released as open-source (e.g. because it is copyrighted by the diocese)
 
 Anyone intending to run a public instance is kindly asked
 to update contact information displayed on the web app.
@@ -57,6 +64,7 @@ see [configuration used at the author's instance of the API][calapicz_config].
 
 GNU/LGPL 3 or later
 
+[calapi]: http://calapi.inadiutorium.cz
 [caro]: http://github.com/igneus/calendarium-romanum
 [caro_data]: https://github.com/igneus/calendarium-romanum/tree/master/data
 [calapicz_config]: https://github.com/igneus/church-calendar-api/blob/calapi.inadiutorium.cz/config/calendars.yml

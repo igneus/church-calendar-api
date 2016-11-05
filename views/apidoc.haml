@@ -80,10 +80,21 @@
       %a{href: '/api/v0/en/calendars/default/today'} /calendars/:cal/today
     %br
     %a{href: '/api/v0/en/calendars/general-en/today'} /calendars/general-en/today
+    %br
+    %b
+      %a{href: '/api/v0/en/calendars/default/yesterday'} /calendars/:cal/yesterday
+    %br
+    %a{href: '/api/v0/en/calendars/general-en/yesterday'} /calendars/general-en/yesterday
+    %br
+    %b
+      %a{href: '/api/v0/en/calendars/default/tomorrow'} /calendars/:cal/tomorrow
+    %br
+    %a{href: '/api/v0/en/calendars/general-en/tomorrow'} /calendars/general-en/tomorrow
   .panel-body
     %p
-      Returns calendar entry for the current day.
-      Don't use this endpoint if you need to serve audience
+      Convenience shortcuts to get calendar entries for the current
+      day and for the previous and next one.
+      Don't use these endpoints if you need to serve audience
       in different timezones or in a single timezone different
       from the API server's one.
 

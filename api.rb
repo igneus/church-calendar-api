@@ -82,8 +82,24 @@ module ChurchCalendar
             }
           end
 
+          get 'yesterday' do
+            day = Date.yesterday
+            calendar = @factory.for_day day
+
+            cal_day = calendar.day day
+            present cal_day, with: ChurchCalendar::Day
+          end
+
           get 'today' do
             day = Date.today
+            calendar = @factory.for_day day
+
+            cal_day = calendar.day day
+            present cal_day, with: ChurchCalendar::Day
+          end
+
+          get 'tomorrow' do
+            day = Date.tomorrow
             calendar = @factory.for_day day
 
             cal_day = calendar.day day

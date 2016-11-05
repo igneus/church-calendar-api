@@ -7,7 +7,7 @@ module ChurchCalendar
     private
 
     def rank
-      object.rank.short_desc
+      object.rank.short_desc || object.rank.desc
     end
 
     def rank_num

@@ -84,21 +84,23 @@ describe ChurchCalendar::API do
     end
   end
 
-  describe '/today' do
-    before do
-      get api_path '/today'
-      @r = dejson last_response.body
-    end
+  %w(/today /tomorrow /yesterday).each do |route|
+    describe route do
+      before do
+        get api_path route
+        @r = dejson last_response.body
+      end
 
-    def day_entry
-      @r
-    end
+      def day_entry
+        @r
+      end
 
-    include DayEntryFormatExamples
+      include DayEntryFormatExamples
 
-    it 'returns a calendar entry' do
-      last_response.must_be :ok?
-      @r['date'].must_be_kind_of String
+      it 'returns a calendar entry' do
+        last_response.must_be :ok?
+        @r['date'].must_be_kind_of String
+      end
     end
   end
 
@@ -147,6 +149,19 @@ describe ChurchCalendar::API do
           # user-readability is a value
           @r['weekday'].must_equal 'friday'
         end
+      end
+
+      describe 'Sunday' do
+        before do
+          get api_path '/2016/9/25'
+          @r = dejson last_response.body
+        end
+
+        def day_entry
+          @r
+        end
+
+        include DayEntryFormatExamples
       end
 
       describe 'memorial' do

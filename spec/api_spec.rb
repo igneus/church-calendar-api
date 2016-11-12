@@ -239,6 +239,13 @@ describe ChurchCalendar::API do
         last_response.must_be :ok?
       end
     end
+
+    describe 'month where a new liturgical year begins' do
+      it 'works' do
+        get api_path '/2016/11'
+        last_response.must_be :ok?
+      end
+    end
   end
 
   describe 'requests not qualified by calendar redirect to default calendar' do

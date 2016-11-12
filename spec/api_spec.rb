@@ -203,7 +203,7 @@ describe ChurchCalendar::API do
   end
 
   describe '/:year/:month' do
-    describe 'valid date' do
+    describe 'valid month' do
       before do
         get api_path '/2015/6'
         @r = dejson last_response.body
@@ -221,6 +221,22 @@ describe ChurchCalendar::API do
         @r[0]['date'].must_equal '2015-06-01'
         @r[0]['season'].must_equal 'ordinary'
         @r[-1]['date'].must_equal '2015-06-30'
+      end
+    end
+
+    describe 'invalid month' do
+      it 'fails' do
+        get api_path '/2015/14'
+        last_response.status.must_equal 400
+        r = dejson last_response.body
+        r['error'].must_equal 'month does not have a valid value'
+      end
+    end
+
+    describe 'month where liturgical and civic year differ' do
+      it 'works' do
+        get api_path '/2015/1'
+        last_response.must_be :ok?
       end
     end
   end

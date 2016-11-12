@@ -125,15 +125,25 @@ module ChurchCalendar
             segment '/:month' do
               get do
                 cal = @calendar
-                begin
-                  days = CR::Util::Month.new(@year, params[:month]).collect do |date|
+                month = CR::Util::Month.new(@year, params[:month])
+
+                range_errors = 0
+                days = month.each_with_index.collect do |date, i|
+                  begin
                     cal.day date
+                  rescue RangeError
+                    range_errors += 1
+                    raise if range_errors > 2
+
+                    # range error at the first day means we are
+                    # in a wrong liturgical year;
+                    # range error in the middle means that end of a
+                    # liturgical year was reached
+                    cal = (i == 0) ? cal.pred : cal.succ
+                    retry
                   end
-                  present days, with: ChurchCalendar::Day
-                rescue RangeError
-                  cal = @calendar.pred
-                  retry
                 end
+                present days, with: ChurchCalendar::Day
               end
 
               params do

@@ -170,8 +170,16 @@ module ChurchCalendar
       # calendar endpoints without calendar specification -
       # redirect all to the default calendar
 
+      get '/yesterday' do
+        redirect build_path('/calendars/default/yesterday'), permanent: true
+      end
+
       get '/today' do
         redirect build_path('/calendars/default/today'), permanent: true
+      end
+
+      get '/tomorrow' do
+        redirect build_path('/calendars/default/tomorrow'), permanent: true
       end
 
       segment '/:year' do

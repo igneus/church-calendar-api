@@ -210,7 +210,7 @@
 17 m : Saint Elizabeth of Hungary, religious
 18 : Dedication of the basilicas of Saints Peter and Paul, Apostles
 21 m : Presentation of the Blessed Virgin Mary
-22 m : Saint Cecilia
+22 m R : Saint Cecilia, virgin and martyr
 23 R : Saint Clement I, pope and martyr
 23 : Saint Columban, religious
 24 m R : Saint Andrew Dung Lac and his companions, martyrs

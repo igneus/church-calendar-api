@@ -37,9 +37,21 @@ end
 describe ChurchCalendar::API do
 
   describe 'language' do
-    it 'supported language is ok' do
-      get '/api/v0/en/calendars/default/today'
-      last_response.must_be :ok?
+    describe 'supported languages' do
+      it 'Czech' do
+        get '/api/v0/cs/calendars/default/today'
+        last_response.must_be :ok?
+      end
+
+      it 'English' do
+        get '/api/v0/en/calendars/default/today'
+        last_response.must_be :ok?
+      end
+
+      it 'Italian' do
+        get '/api/v0/it/calendars/default/today'
+        last_response.must_be :ok?
+      end
     end
 
     it 'unsupported language results in an error' do

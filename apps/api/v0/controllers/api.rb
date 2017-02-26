@@ -1,9 +1,5 @@
-require 'grape'
-require 'grape-entity'
 require 'oj'
 require 'multi_json'
-
-require_relative 'lib/church-calendar'
 
 module ChurchCalendar
   class API < Grape::API
@@ -63,6 +59,8 @@ module ChurchCalendar
               @factory = @repo.get_calendar_factory params[:cal]
             rescue KeyError
               error! "Requested calendar '#{params[:cal]}' not found.", 404
+            rescue ChurchCalendar::UnknownCalendarError => err
+              error! err.message, 404
             end
           end
 

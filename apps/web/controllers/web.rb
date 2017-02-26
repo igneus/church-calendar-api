@@ -1,8 +1,6 @@
 require 'scorched'
 require 'haml'
 
-require_relative 'lib/church-calendar'
-
 module ChurchCalendar
   class Web < Scorched::Controller
     include CalendariumRomanum
@@ -11,6 +9,7 @@ module ChurchCalendar
       static_dir: 'public'
     }
     render_defaults << {
+      dir: File.expand_path('../views', File.dirname(__FILE__)),
       layout: :_layout,
       engine: :haml
     }

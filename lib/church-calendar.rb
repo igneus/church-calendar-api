@@ -3,8 +3,6 @@ require 'i18n/backend/fallbacks'
 require 'yaml'
 require 'calendarium-romanum'
 
-require_relative '../app/entities/celebration.rb'
-require_relative '../app/entities/day.rb'
 require_relative 'church-calendar/services/calendar_factory.rb'
 require_relative 'church-calendar/services/sanctorale_repository.rb'
 require_relative 'church-calendar/models/church_calendar.rb'

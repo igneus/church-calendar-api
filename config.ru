@@ -1,8 +1,9 @@
 require 'rack/cors'
 require 'rack/contrib/response_headers'
 
-require_relative 'api.rb'
-require_relative 'web.rb'
+require_relative 'lib/church-calendar'
+require_relative 'apps/api/v0'
+require_relative 'apps/web'
 
 use Rack::Cors do
   allow do

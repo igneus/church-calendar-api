@@ -52,9 +52,9 @@ module ChurchCalendar
     end
   end
 
-  class UnknownCalendarError < Grape::Exceptions::Base
+  class UnknownCalendarError < RuntimeError
     def initialize(key)
-      super(status: 404, message: "Unknown calendar #{key.inspect}")
+      super("Unknown calendar #{key.inspect}")
     end
   end
 end

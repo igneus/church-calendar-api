@@ -1,7 +1,7 @@
 require 'scorched'
 require 'haml'
-require 'calendarium-romanum'
-require 'yaml'
+
+require_relative 'lib/church-calendar'
 
 module ChurchCalendar
   class Web < Scorched::Controller

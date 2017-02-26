@@ -7,7 +7,7 @@ module ChurchCalendar
                           desc: "promulgated by motu proprio Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226)."
                          }
 
-  APP_ROOT = File.expand_path '..', File.dirname(__FILE__)
+  APP_ROOT = File.expand_path '../../..', File.dirname(__FILE__)
   CALENDARS_CONFIG = File.join APP_ROOT, 'config', 'calendars.yml'
   DATA_PATH = File.join APP_ROOT, 'data'
 

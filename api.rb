@@ -1,23 +1,9 @@
-require 'i18n'
-require 'i18n/backend/fallbacks'
-
 require 'grape'
 require 'grape-entity'
 require 'oj'
 require 'multi_json'
-require 'yaml'
-require 'calendarium-romanum'
 
-require_relative 'app/entities/celebration.rb'
-require_relative 'app/entities/day.rb'
-require_relative 'app/calendarfactory.rb'
-require_relative 'app/sanctoralerepository.rb'
-require_relative 'app/churchcalendar.rb'
-
-CR = CalendariumRomanum
-
-I18n::Backend::Simple.include I18n::Backend::Fallbacks
-I18n.backend.load_translations
+require_relative 'lib/church-calendar'
 
 module ChurchCalendar
   class API < Grape::API

@@ -58,6 +58,8 @@ describe ChurchCalendar::API do
       get '/api/v0/xx/calendars/default/today'
       last_response.wont_be :ok?
       last_response.status.must_equal 400
+      r = dejson last_response.body
+      r['error'].must_equal 'lang does not have a valid value'
     end
   end
 

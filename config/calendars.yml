@@ -11,6 +11,12 @@ general-la:
   files:
     - universal-la.txt
 
+general-it:
+  title: Calendario Romano Generale
+  language: it
+  files:
+    - universal-it.txt
+
 czech:
   title: Český národní kalendář
   language: cs

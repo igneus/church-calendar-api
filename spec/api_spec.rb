@@ -197,21 +197,25 @@ describe ChurchCalendar::API do
       it 'invalid month returns bad request' do
         get api_path '/2015/13/1'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'month does not have a valid value'
       end
 
       it 'invalid year (too old) returns bad request' do
         get api_path '/1950/12/1'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'The calendar was promulgated in 1969, 1950 is invalid year'
       end
 
       it 'invalid day - generally' do
         get api_path '/2015/2/39'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'day does not have a valid value'
       end
 
       it 'invalid day - for the month specifically' do
         get api_path '/2015/2/29'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'day does not have a valid value'
       end
     end
   end

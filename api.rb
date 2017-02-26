@@ -163,7 +163,6 @@ module ChurchCalendar
                   error! 'day does not have a valid value', 400
                 end
                 calendar = @factory.for_day day
-                year = @calendar.year
 
                 cal_day = calendar.day @year, params[:month], params[:day]
                 present cal_day, with: ChurchCalendar::Day

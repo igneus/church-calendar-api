@@ -15,7 +15,7 @@ module ChurchCalendar
       # load sanctorale definitions over each other
       sanctorales.each do |path|
         s = CalendariumRomanum::Sanctorale.new
-        loader.load_from_file s, path
+        loader.load_from_file path, s
         @sanctorale.update s
       end
     end

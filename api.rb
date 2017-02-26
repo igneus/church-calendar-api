@@ -1,3 +1,6 @@
+require 'i18n'
+require 'i18n/backend/fallbacks'
+
 require 'grape'
 require 'grape-entity'
 require 'oj'
@@ -12,6 +15,9 @@ require_relative 'app/sanctoralerepository.rb'
 require_relative 'app/churchcalendar.rb'
 
 CR = CalendariumRomanum
+
+I18n::Backend::Simple.include I18n::Backend::Fallbacks
+I18n.backend.load_translations
 
 module ChurchCalendar
   class API < Grape::API
@@ -170,8 +176,16 @@ module ChurchCalendar
       # calendar endpoints without calendar specification -
       # redirect all to the default calendar
 
+      get '/yesterday' do
+        redirect build_path('/calendars/default/yesterday'), permanent: true
+      end
+
       get '/today' do
         redirect build_path('/calendars/default/today'), permanent: true
+      end
+
+      get '/tomorrow' do
+        redirect build_path('/calendars/default/tomorrow'), permanent: true
       end
 
       segment '/:year' do

@@ -37,15 +37,29 @@ end
 describe ChurchCalendar::API do
 
   describe 'language' do
-    it 'supported language is ok' do
-      get '/api/v0/en/calendars/default/today'
-      last_response.must_be :ok?
+    describe 'supported languages' do
+      it 'Czech' do
+        get '/api/v0/cs/calendars/default/today'
+        last_response.must_be :ok?
+      end
+
+      it 'English' do
+        get '/api/v0/en/calendars/default/today'
+        last_response.must_be :ok?
+      end
+
+      it 'Italian' do
+        get '/api/v0/it/calendars/default/today'
+        last_response.must_be :ok?
+      end
     end
 
     it 'unsupported language results in an error' do
       get '/api/v0/xx/calendars/default/today'
       last_response.wont_be :ok?
       last_response.status.must_equal 400
+      r = dejson last_response.body
+      r['error'].must_equal 'lang does not have a valid value'
     end
   end
 
@@ -183,21 +197,25 @@ describe ChurchCalendar::API do
       it 'invalid month returns bad request' do
         get api_path '/2015/13/1'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'month does not have a valid value'
       end
 
       it 'invalid year (too old) returns bad request' do
         get api_path '/1950/12/1'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'The calendar was promulgated in 1969, 1950 is invalid year'
       end
 
       it 'invalid day - generally' do
         get api_path '/2015/2/39'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'day does not have a valid value'
       end
 
       it 'invalid day - for the month specifically' do
         get api_path '/2015/2/29'
         last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'day does not have a valid value'
       end
     end
   end

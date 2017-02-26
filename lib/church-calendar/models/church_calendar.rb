@@ -18,4 +18,9 @@ module ChurchCalendar
   def self.sanctorale_repository
     @@sanctorale_repository
   end
+
+  @@calendars_repository = CalendarRepository.new(@@sanctorale_repository)
+  def self.calendars
+    @@calendars_repository
+  end
 end

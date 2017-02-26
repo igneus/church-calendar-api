@@ -106,9 +106,7 @@ module ChurchCalendar
     end
 
     def prepare_calendar(date, cal)
-      repo = ChurchCalendar.sanctorale_repository
-      factory = repo.get_calendar_factory cal
-      @cal = factory.for_day date
+      @cal = ChurchCalendar.calendars[cal]
     end
   end
 end

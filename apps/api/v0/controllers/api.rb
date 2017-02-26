@@ -45,18 +45,14 @@ module ChurchCalendar
     segment '/:lang' do
 
       resource :calendars do
-        before do
-          @repo = ChurchCalendar.sanctorale_repository
-        end
-
         get do
-          @repo.keys
+          ChurchCalendar.calendars.keys
         end
 
         segment '/:cal' do
           before do
             begin
-              @factory = @repo.get_calendar_factory params[:cal]
+              @calendar = ChurchCalendar.calendars[params[:cal]]
             rescue KeyError
               error! "Requested calendar '#{params[:cal]}' not found.", 404
             rescue ChurchCalendar::UnknownCalendarError => err
@@ -68,44 +64,38 @@ module ChurchCalendar
           get do
             {
              system: CALENDAR_SYSTEM_DESC,
-             sanctorale: @repo.metadata(params[:cal])
+             sanctorale: @calendar.metadata
             }
           end
 
           get 'yesterday' do
             day = Date.yesterday
-            calendar = @factory.for_day day
-
-            cal_day = calendar.day day
+            cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           get 'today' do
             day = Date.today
-            calendar = @factory.for_day day
-
-            cal_day = calendar.day day
+            cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           get 'tomorrow' do
             day = Date.tomorrow
-            calendar = @factory.for_day day
-
-            cal_day = calendar.day day
+            cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           segment '/:year' do
             before do
               @year = get_year params[:year]
-              @calendar = @factory.for_year @year
             end
 
             get do
+              year = @calendar.year @year
               {
-               lectionary: @calendar.lectionary,
-               ferial_lectionary: @calendar.ferial_lectionary
+               lectionary: year.lectionary,
+               ferial_lectionary: year.ferial_lectionary
               }
             end
 
@@ -114,25 +104,7 @@ module ChurchCalendar
             end
             segment '/:month' do
               get do
-                cal = @calendar
-                month = CR::Util::Month.new(@year, params[:month])
-
-                range_errors = 0
-                days = month.each_with_index.collect do |date, i|
-                  begin
-                    cal.day date
-                  rescue RangeError
-                    range_errors += 1
-                    raise if range_errors > 2
-
-                    # range error at the first day means we are
-                    # in a wrong liturgical year;
-                    # range error in the middle means that end of a
-                    # liturgical year was reached
-                    cal = (i == 0) ? cal.pred : cal.succ
-                    retry
-                  end
-                end
+                days = @calendar.days_of_month @year, params[:month]
                 present days, with: ChurchCalendar::Day
               end
 
@@ -141,14 +113,14 @@ module ChurchCalendar
               end
               get '/:day' do
                 begin
+                  # check the date is valid
                   day = Date.new @year, params[:month], params[:day]
                 rescue ArgumentError
-                  # year and month is already validated
+                  # year and month is already validated, so the error is definitely about day
                   error! 'day does not have a valid value', 400
                 end
-                calendar = @factory.for_day day
 
-                cal_day = calendar.day @year, params[:month], params[:day]
+                cal_day = @calendar.day day
                 present cal_day, with: ChurchCalendar::Day
               end
             end

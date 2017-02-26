@@ -4,7 +4,9 @@ require 'yaml'
 require 'calendarium-romanum'
 
 require_relative 'church-calendar/services/calendar_factory.rb'
+require_relative 'church-calendar/services/calendar_facade.rb'
 require_relative 'church-calendar/services/sanctorale_repository.rb'
+require_relative 'church-calendar/services/calendar_repository.rb'
 require_relative 'church-calendar/models/church_calendar.rb'
 
 CR = CalendariumRomanum

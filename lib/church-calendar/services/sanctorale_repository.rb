@@ -27,6 +27,10 @@ module ChurchCalendar
       @calendars.keys
     end
 
+    def has_key?(key)
+      @calendars.has_key? key
+    end
+
     # Array of data files for the given calendar;
     # should be loaded over each other in the given order
     def data_files(key)

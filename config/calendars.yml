@@ -23,6 +23,20 @@ czech:
   files:
     - czech-cs.txt
 
+czech-cechy:
+  title: kalendář české církevní provincie
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-cechy-cs.txt
+
+czech-morava:
+  title: kalendář moravské církevní provincie
+  language: cs
+  files:
+    - czech-cs.txt
+    - czech-morava-cs.txt
+
 czech-pha:
   title: kalendář pražské arcidiecéze
   language: cs

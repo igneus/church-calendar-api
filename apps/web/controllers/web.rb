@@ -23,6 +23,8 @@ module ChurchCalendar
     end
 
     get '/browse/:cal' do |cal|
+      prepare_calendar(Date.today, cal)
+
       start_year = Time.now.year - 5
       end_year = start_year + 10
       l = {
@@ -35,11 +37,24 @@ module ChurchCalendar
       render :browse, locals: l
     end
 
-    get '/browse/:cal/:year/:month' do |cal,year, month|
+    get '/browse/:cal/:year' do |cal,year|
+      redirect "/browse/#{cal}/#{year}/1"
+    end
+
+    get '/browse/:cal/:year/:month' do |cal, year, month|
+      numeric = /\A\d+\Z/
+      unless year =~ numeric && month =~ numeric
+        halt 400
+      end
+
       year = year.to_i
       month = month.to_i
 
-      date = Date.new(year, month, 1)
+      begin
+        date = Date.new(year, month, 1)
+      rescue ArgumentError
+        halt 400
+      end
 
       prepare_calendar(date, cal)
 
@@ -107,6 +122,8 @@ module ChurchCalendar
 
     def prepare_calendar(date, cal)
       @cal = ChurchCalendar.calendars[cal]
+    rescue KeyError
+      halt 404
     end
   end
 end

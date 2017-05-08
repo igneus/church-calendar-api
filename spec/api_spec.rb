@@ -35,6 +35,10 @@ end
 
 # the API tested using Rack::Test
 describe ChurchCalendar::API do
+  # expected by Rack::Test methods
+  def app
+    ChurchCalendar::API
+  end
 
   describe 'language' do
     describe 'supported languages' do

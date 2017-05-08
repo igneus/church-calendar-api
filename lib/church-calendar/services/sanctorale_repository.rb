@@ -27,6 +27,10 @@ module ChurchCalendar
       @calendars.keys
     end
 
+    def has_key?(key)
+      @calendars.has_key? key
+    end
+
     # Array of data files for the given calendar;
     # should be loaded over each other in the given order
     def data_files(key)
@@ -52,9 +56,9 @@ module ChurchCalendar
     end
   end
 
-  class UnknownCalendarError < Grape::Exceptions::Base
+  class UnknownCalendarError < RuntimeError
     def initialize(key)
-      super(status: 404, message: "Unknown calendar #{key.inspect}")
+      super("Unknown calendar #{key.inspect}")
     end
   end
 end

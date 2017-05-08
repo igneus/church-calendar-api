@@ -35,6 +35,10 @@ end
 
 # the API tested using Rack::Test
 describe ChurchCalendar::API do
+  # expected by Rack::Test methods
+  def app
+    ChurchCalendar::API
+  end
 
   describe 'language' do
     describe 'supported languages' do
@@ -189,6 +193,36 @@ describe ChurchCalendar::API do
           c.size.must_equal 1
           c[0]['rank'].must_equal 'memorial'
           c[0]['title'].must_equal 'Saint Barnabas the Apostle'
+        end
+      end
+    end
+
+    describe 'example year' do
+      year = 2000
+
+      it 'is a leap year' do
+        Date.new(year).must_be :leap?
+      end
+
+      describe 'all months' do
+        (1..12).each do |month|
+          path = "/#{year}/#{month}"
+
+          it path do
+            get api_path path
+            last_response.must_be :ok?
+          end
+        end
+      end
+
+      describe 'all days' do
+        CalendariumRomanum::Util::Year.new(year).each do |date|
+          path = "/#{date.year}/#{date.month}/#{date.day}"
+
+          it path do
+            get api_path path
+            last_response.must_be :ok?
+          end
         end
       end
     end

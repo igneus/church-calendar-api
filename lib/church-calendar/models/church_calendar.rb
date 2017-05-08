@@ -7,7 +7,7 @@ module ChurchCalendar
                           desc: "promulgated by motu proprio Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226)."
                          }
 
-  APP_ROOT = File.expand_path '..', File.dirname(__FILE__)
+  APP_ROOT = File.expand_path '../../..', File.dirname(__FILE__)
   CALENDARS_CONFIG = File.join APP_ROOT, 'config', 'calendars.yml'
   DATA_PATH = File.join APP_ROOT, 'data'
 
@@ -17,5 +17,10 @@ module ChurchCalendar
   @@sanctorale_repository = SanctoraleRepository.load_from CALENDARS_CONFIG, DATA_PATH
   def self.sanctorale_repository
     @@sanctorale_repository
+  end
+
+  @@calendars_repository = CalendarRepository.new(@@sanctorale_repository)
+  def self.calendars
+    @@calendars_repository
   end
 end

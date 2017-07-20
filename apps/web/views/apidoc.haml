@@ -7,16 +7,51 @@
   You may explore the API by following the links bellow and experimenting
   with the URIs.
 
-%h2 Specify API Version
+%h2 Specify API Version and Language
 
 %p
   API version must be specified at the beginning of each request path
   %code /api/:version/:lang
-  \- right now the API only has version 0 and language English:
+  Right now the API only has version 0
+  %code v0
+  and a few supported languages:
+
+%ul
+  %li
+    %code en
+    English
+  %li
+    %code it
+    Italian
+  %li
+    %code la
+    Latin
+  %li
+    %code cs
+    Czech
+
+%p
+  Full example:
   %code /api/v0/en
 
 %p
-  In the following examples this common beginning is omitted.
+  Due to a design flaw this API version handles
+  %em temporale
+  and
+  %em sanctorale
+  feast names independently.
+  Temporale feast names are governed by language specified
+  in request path.
+  E.g.
+  %code /api/v0/en/calendars/czech/...
+  would return a mixture of Czech (for sanctorale)
+  and English (for temporale) feast names.
+  In order to have all Czech, it is necessary to specify Czech language.
+  %code /api/v0/cs/calendars/czech/...
+
+%p
+  In the following examples the common beginning explained above
+  is omitted for brevity.
 
 %h2 Select Calendar to Query
 

@@ -147,23 +147,24 @@
             "weekday":"saturday"
           }
 
-.alert.alert-info
-  %p
-    If you wish to query the
-    %a{href: '/api/v0/en/calendars/default'} default calendar,
-    you may omit
-    %code /calendars/default
-    from the path. The API will redirect you with status 301
-    to the full path.
-    E.g.
-    %code
-      %a{href: '/api/v0/en/today'} /today
-    redirects to
-    %code /calendars/default/today
-    This is especially useful when exploring the API manually through
-    the address bar of your browser or
-    %b curl
-    in the command line.
+    .alert.alert-info
+      %p
+        %strong Useful shortcut:
+        If you wish to query the
+        %a{href: '/api/v0/en/calendars/default'} default calendar,
+        you may omit
+        %code /calendars/default
+        from the path. The API will redirect you with status 301
+        to the full path.
+        E.g.
+        %code
+          %a{href: '/api/v0/en/today'} /today
+        redirects to
+        %code /calendars/default/today
+        This is especially useful when exploring the API manually through
+        the address bar of your browser or
+        %b curl
+        on the command line.
 
 .panel.panel-default
   .panel-heading
@@ -183,7 +184,7 @@
 
     .alert.alert-warning
       %p
-        %strong.text-uppercase Plese note:
+        %strong Promulgation date as limit:
         The API refuses requests for dates with year being older than
         the year of promulgation of the implemented calendar system.
         You can find it by hitting the
@@ -215,7 +216,7 @@
       Returns the year's common "liturgical setup".
 
     .alert.alert-warning
-      %strong.text-uppercase Important:
+      %strong Civil vs. liturgical year:
       The way this endpoint works might not be obvious
       at the first glance.
       The problem is that the civil and Catholic liturgical year do not match.

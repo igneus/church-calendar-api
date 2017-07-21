@@ -43,6 +43,9 @@ module ChurchCalendar
       requires :lang, type: Symbol, values: LANGS
     end
     segment '/:lang' do
+      after_validation do
+        I18n.locale = params[:lang]
+      end
 
       resource :calendars do
         get do

@@ -7,16 +7,51 @@
   You may explore the API by following the links bellow and experimenting
   with the URIs.
 
-%h2 Specify API Version
+%h2 Specify API Version and Language
 
 %p
   API version must be specified at the beginning of each request path
   %code /api/:version/:lang
-  \- right now the API only has version 0 and language English:
+  Right now the API only has version 0
+  %code v0
+  and a few supported languages:
+
+%ul
+  %li
+    %code en
+    English
+  %li
+    %code it
+    Italian
+  %li
+    %code la
+    Latin
+  %li
+    %code cs
+    Czech
+
+%p
+  Full example:
   %code /api/v0/en
 
 %p
-  In the following examples this common beginning is omitted.
+  Due to a design flaw this API version handles
+  %em temporale
+  and
+  %em sanctorale
+  feast names independently.
+  Temporale feast names are governed by language specified
+  in request path.
+  E.g.
+  %code /api/v0/en/calendars/czech/...
+  would return a mixture of Czech (for sanctorale)
+  and English (for temporale) feast names.
+  In order to have all Czech, it is necessary to specify Czech language.
+  %code /api/v0/cs/calendars/czech/...
+
+%p
+  In the following examples the common beginning explained above
+  is omitted for brevity.
 
 %h2 Select Calendar to Query
 
@@ -112,23 +147,24 @@
             "weekday":"saturday"
           }
 
-.alert.alert-info
-  %p
-    If you wish to query the
-    %a{href: '/api/v0/en/calendars/default'} default calendar,
-    you may omit
-    %code /calendars/default
-    from the path. The API will redirect you with status 301
-    to the full path.
-    E.g.
-    %code
-      %a{href: '/api/v0/en/today'} /today
-    redirects to
-    %code /calendars/default/today
-    This is especially useful when exploring the API manually through
-    the address bar of your browser or
-    %b curl
-    in the command line.
+    .alert.alert-info
+      %p
+        %strong Useful shortcut:
+        If you wish to query the
+        %a{href: '/api/v0/en/calendars/default'} default calendar,
+        you may omit
+        %code /calendars/default
+        from the path. The API will redirect you with status 301
+        to the full path.
+        E.g.
+        %code
+          %a{href: '/api/v0/en/today'} /today
+        redirects to
+        %code /calendars/default/today
+        This is especially useful when exploring the API manually through
+        the address bar of your browser or
+        %b curl
+        on the command line.
 
 .panel.panel-default
   .panel-heading
@@ -148,7 +184,7 @@
 
     .alert.alert-warning
       %p
-        %strong.text-uppercase Plese note:
+        %strong Promulgation date as limit:
         The API refuses requests for dates with year being older than
         the year of promulgation of the implemented calendar system.
         You can find it by hitting the
@@ -180,7 +216,7 @@
       Returns the year's common "liturgical setup".
 
     .alert.alert-warning
-      %strong.text-uppercase Important:
+      %strong Civil vs. liturgical year:
       The way this endpoint works might not be obvious
       at the first glance.
       The problem is that the civil and Catholic liturgical year do not match.

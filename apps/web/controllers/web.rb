@@ -23,7 +23,7 @@ module ChurchCalendar
     end
 
     get '/browse/:cal' do |cal|
-      prepare_calendar(Date.today, cal)
+      prepare_calendar(cal)
 
       start_year = Time.now.year - 5
       end_year = start_year + 10
@@ -50,28 +50,17 @@ module ChurchCalendar
       year = year.to_i
       month = month.to_i
 
+      prepare_calendar(cal)
+
       begin
-        date = Date.new(year, month, 1)
+        month_enumerator = CalendariumRomanum::Util::Month.new(year, month)
       rescue ArgumentError
         halt 400
       end
 
-      prepare_calendar(date, cal)
-
-      entries = []
-
-      begin
-        begin
-          entries << @cal.day(date)
-        rescue RangeError
-          if month >= 11
-            prepare_calendar(date, cal)
-            retry
-          end
-        end
-
-        date = date.succ
-      end until date.month != month
+      entries = month_enumerator.collect do |date|
+        @cal.day(date)
+      end
 
       l = {
            year: year,
@@ -120,7 +109,7 @@ module ChurchCalendar
       return "#{format_weekday day.weekday}, #{ordinal day.season_week} week of #{format_season day.season}"
     end
 
-    def prepare_calendar(date, cal)
+    def prepare_calendar(cal)
       @cal = ChurchCalendar.calendars[cal]
     rescue KeyError
       halt 404

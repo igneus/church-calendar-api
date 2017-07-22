@@ -2,6 +2,8 @@ require_relative 'spec_helper'
 
 # the website tested using Rack::Test
 describe ChurchCalendar::Web do
+  include Rack::Test::Methods
+
   def app
     ChurchCalendar::Web
   end

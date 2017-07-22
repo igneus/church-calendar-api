@@ -6,5 +6,3 @@ require 'rack/test'
 require_relative '../lib/church-calendar'
 require_relative '../apps/api/v0'
 require_relative '../apps/web'
-
-include Rack::Test::Methods

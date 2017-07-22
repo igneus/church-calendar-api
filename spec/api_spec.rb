@@ -35,6 +35,8 @@ end
 
 # the API tested using Rack::Test
 describe ChurchCalendar::API do
+  include Rack::Test::Methods
+
   # expected by Rack::Test methods
   def app
     ChurchCalendar::API

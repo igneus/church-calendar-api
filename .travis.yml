@@ -4,11 +4,7 @@ dist: trusty
 
 rvm:
   - 2.2.2
-  - 2.4.1
-
-gemfile:
-  - Gemfile # used in production
-  - gemfiles/Gemfile.dev # test with development version of calendarium-romanum and fresh gems
+  - 2.3.1
 
 install: bundle install --jobs=3 --deployment --without development
 
@@ -16,3 +12,12 @@ script: bundle exec rake test
 
 git:
   depth: 3
+
+matrix:
+  # test with development version of calendarium-romanum and fresh gems
+  include:
+    rvm: 2.3.1
+    gemfile: gemfiles/Gemfile.dev
+  include:
+    rvm: ruby-head
+    gemfile: gemfiles/Gemfile.dev

@@ -6,7 +6,7 @@ rvm:
   - 2.0.0
   - 2.4.1
 
-gemfiles:
+gemfile:
   - Gemfile # used in production
   - gemfiles/Gemfile.dev # test with development version of calendarium-romanum and fresh gems
 

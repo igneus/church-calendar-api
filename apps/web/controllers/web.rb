@@ -86,27 +86,13 @@ module ChurchCalendar
 
 
 
-    def ordinal(i)
-      suff = {1 => 'st', 2 => 'nd', 3 => 'rd'}
-      "#{i}#{suff[i] || 'th'}"
-    end
-
     def format_weekday(i)
       %w{Sun Mon Tue Wed Thu Fri Sat}[i]
     end
 
-    def format_season(s)
-      ss = s.to_s
-      ss[0].upcase + ss[1..-1]
-    end
-
     def celebration_text(day, celeb)
-      unless celeb.title.empty?
-        r = celeb.rank.short_desc
-        return "#{celeb.title}#{', ' if r}#{r}"
-      end
-
-      return "#{format_weekday day.weekday}, #{ordinal day.season_week} week of #{format_season day.season}"
+      r = celeb.rank.short_desc
+      return "#{celeb.title}#{', ' if r}#{r}"
     end
 
     def prepare_calendar(cal)

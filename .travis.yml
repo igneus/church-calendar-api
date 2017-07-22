@@ -1,0 +1,18 @@
+language: ruby
+
+dist: trusty
+
+rvm:
+  - 2.0.0
+  - 2.4.1
+
+gemfiles:
+  - Gemfile # used in production
+  - gemfiles/Gemfile.dev # test with development version of calendarium-romanum and fresh gems
+
+install: bundle install --jobs=3 --deployment --without development
+
+script: bundle exec rake test
+
+git:
+  depth: 3

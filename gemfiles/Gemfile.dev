@@ -1,0 +1,3 @@
+eval_gemfile File.join(File.dirname(__FILE__), 'common.rb')
+
+gem 'calendarium-romanum', github: 'igneus/calendarium-romanum'

@@ -1,5 +1,7 @@
 module ChurchCalendar
   class CalendarRepository
+    extend Forwardable
+
     def initialize(sanctorale_repo)
       @sanctorale_repo = sanctorale_repo
     end
@@ -12,8 +14,6 @@ module ChurchCalendar
       CalendarFacade.new key, @sanctorale_repo
     end
 
-    def keys
-      @sanctorale_repo.keys
-    end
+    def_delegators :@sanctorale_repo, :keys, :has_key?
   end
 end

@@ -3,6 +3,8 @@ require 'multi_json'
 
 module ChurchCalendar
   class API < Grape::API
+    include Grape::Extensions::Hash::ParamBuilder
+
     API_VERSION = 'v0'
     version API_VERSION, using: :path
 
@@ -18,22 +20,6 @@ module ChurchCalendar
     end
 
     helpers do
-      def get_year(s)
-        if s == 'current'
-          return Time.now.year
-        end
-
-        year = s.to_i
-        validate_year! year
-        return year
-      end
-
-      def validate_year!(year)
-        if year < CALENDAR_START
-          error! "The calendar was promulgated in #{CALENDAR_START}, #{year} is invalid year", 400
-        end
-      end
-
       def build_path(path)
         "/api/#{API_VERSION}/#{params[:lang]}" + path
       end
@@ -52,15 +38,12 @@ module ChurchCalendar
           ChurchCalendar.calendars.keys
         end
 
-        segment '/:cal' do
-          before do
-            begin
-              @calendar = ChurchCalendar.calendars[params[:cal]]
-            rescue KeyError
-              error! "Requested calendar '#{params[:cal]}' not found.", 404
-            rescue ChurchCalendar::UnknownCalendarError => err
-              error! err.message, 404
-            end
+        params do
+          requires :calendar, type: String, values: ->(v) { ChurchCalendar.calendars.has_key?(v) }
+        end
+        segment '/:calendar' do
+          after_validation do
+            @calendar = ChurchCalendar.calendars[params[:calendar]]
           end
 
           desc 'Human-readable description of the calendar provided'
@@ -89,9 +72,12 @@ module ChurchCalendar
             present cal_day, with: ChurchCalendar::Day
           end
 
+          params do
+            requires :year, type: Integer, values: {value: ->(v) { v >= ChurchCalendar::CALENDAR_START }, message: "invalid, the calendar was promulgated in #{CALENDAR_START}"}
+          end
           segment '/:year' do
-            before do
-              @year = get_year params[:year]
+            after_validation do
+              @year = params[:year]
             end
 
             get do

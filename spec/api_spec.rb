@@ -88,7 +88,8 @@ describe ChurchCalendar::API do
   describe '/calendars/:cal' do
     it 'returns calendar description' do
       get '/api/v0/en/calendars/unknown'
-      last_response.status.must_equal 404
+      last_response.status.must_equal 400
+      dejson(last_response.body)['error'].must_equal 'calendar does not have a valid value'
     end
   end
 
@@ -239,7 +240,7 @@ describe ChurchCalendar::API do
       it 'invalid year (too old) returns bad request' do
         get api_path '/1950/12/1'
         last_response.status.must_equal 400
-        dejson(last_response.body)['error'].must_equal 'The calendar was promulgated in 1969, 1950 is invalid year'
+        dejson(last_response.body)['error'].must_equal 'year invalid, the calendar was promulgated in 1969'
       end
 
       it 'invalid day - generally' do

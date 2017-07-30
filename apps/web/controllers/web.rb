@@ -97,6 +97,7 @@ module ChurchCalendar
 
     def prepare_calendar(cal)
       @cal = ChurchCalendar.calendars[cal]
+      I18n.locale = @cal.metadata['language']
     rescue KeyError
       halt 404
     end

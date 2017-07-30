@@ -1,0 +1,275 @@
+---
+swagger: '2.0'
+info:
+  title: Liturgical Calendar API
+  description: Roman Catholic liturgical calendar
+  contact:
+    email: <%= email %>
+  version: v0
+externalDocs:
+  description: Human-readable API documentation
+  url: <%= docs_url %>
+consumes: [application/json]
+produces: [application/json]
+basePath: /api/v0
+
+paths:
+  /{lang}/calendars:
+    parameters:
+      - $ref: '#/parameters/lang'
+    get:
+      description: Lists available calendars
+      responses:
+        200:
+          description: Calendars
+          schema:
+            type: array
+            items:
+              type: string
+              description: |
+                Calendar ID which can be used as path argument
+                in calls to other endpoints to retrieve calendar data
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+    get:
+      description: Calendar description
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Calendar'
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}/yesterday:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+    get:
+      description: Calendar entry for yesterday
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Day'
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}/today:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+    get:
+      description: Calendar entry for today
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Day'
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}/tomorrow:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+    get:
+      description: Calendar entry for tomorrow
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Day'
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}/{year}:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+      - $ref: '#/parameters/year'
+    get:
+      description: General characteristics of a liturgical year
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Year'
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}/{year}/{month}:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+      - $ref: '#/parameters/year'
+      - $ref: '#/parameters/month'
+    get:
+      description: Calendar entries for a whole month
+      responses:
+        200:
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Day'
+        default:
+          $ref: '#/responses/UnexpectedError'
+  /{lang}/calendars/{calendar}/{year}/{month}/{day}:
+    parameters:
+      - $ref: '#/parameters/lang'
+      - $ref: '#/parameters/calendar'
+      - $ref: '#/parameters/year'
+      - $ref: '#/parameters/month'
+      - $ref: '#/parameters/day'
+    get:
+      description: Calendar entry for the specified day
+      responses:
+        200:
+          schema:
+            $ref: '#/definitions/Day'
+        default:
+          $ref: '#/responses/UnexpectedError'
+
+definitions:
+  Calendar:
+    description: Description of a calendar
+    properties:
+      system:
+        type: object
+        description: Description of the (liturgical-legal) calendar system
+        properties:
+          promulgated:
+            type: integer
+            description: Year of promulgation
+          desc:
+            type: string
+            description: Reference to legal texts defining the system
+      sanctorale:
+        type: object
+        description: Description of the chosen sanctorale calendar
+        properties:
+          title:
+            type: string
+            description: "The calendar's name"
+          language:
+            type: string
+            description: "The calendar's language specified by a locale code"
+
+  Celebration:
+    description: Liturgical celebration (Sunday, ferial, feast, ...)
+    properties:
+      title:
+        type: string
+        description: Title of the celebration, for humans
+      colour:
+        type: string
+        enum: [green, violet, white, red]
+        description: Liturgical colour
+      rank:
+        type: string
+        description: "Short name of the celebration's liturgical rank, localized"
+      rank_num:
+        type: number
+        format: float
+        description: |
+          Number from 1.1 to 4. The smaller number, the greater rank.
+          Numbers correspond with section numbering
+          in the Table of Liturgical Days.
+
+  Day:
+    description: Calendar entry of a liturgical day
+    properties:
+      date:
+        type: string
+        format: date
+      season:
+        type: string
+        enum: [advent, christmas, lent, easter, ordinary]
+        description: Liturgical season
+      season_week:
+        type: integer
+        description: |
+          Week of the season.
+          Smallest possible value is 0 (used only in Lent,
+          other seasons start with week 1),
+          greatest 34.
+      celebrations:
+        type: array
+        items:
+          $ref: '#/definitions/Celebration'
+        description: |
+          List of one or more celebrations occurring on the day.
+          Multiple items occur only in two cases:
+          1. choice between a non-privileged ferial and one or more
+             optional memorials
+          2. a privileged ferial + one or more commemorations
+             that can be added to the ferial office
+      weekday:
+        type: string
+        enum: [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+  Error:
+    description: Error response
+    properties:
+      error:
+        type: string
+        description: Description of the encountered error
+
+  Year:
+    description: General characteristics of a liturgical year
+    properties:
+      lectionary:
+        type: string
+        enum: [A, B, C]
+        description: Sunday lectionary cycle
+      ferial_lectionary:
+        type: integer
+        enum: [1, 2]
+        description: Ferial lectionary cycle
+
+responses:
+  UnexpectedError:
+    description: unexpected error
+    schema:
+      $ref: '#/definitions/Error'
+
+parameters:
+  lang:
+    name: lang
+    in: path
+    required: true
+    type: string
+    enum: [en, la, cs, it]
+    description: |
+      Specifies language used for titles of temporale feasts,
+      Sundays and ferials, as well as other localized strings
+      (mentioned as such in this documentation).
+      Please note that while titles of sanctorale feasts are
+      taken from the calendar, titles of abovementioned
+      temporale celebrations are determined by the locale.
+      So you have to choose a correct combination of locale and
+      calendar in order to retrieve coherent data in one language.
+  calendar:
+    name: calendar
+    in: path
+    required: true
+    type: string
+    description: |
+      Identifier of the calendar to query.
+      See response of /{lang}/calendars for possible values.
+  year:
+    name: year
+    in: path
+    required: true
+    type: integer
+    minimum: <%= promulgation_year %>
+    description: |
+      Year must be greater than or equal to the promulgation year
+      of the calendar system.
+  month:
+    name: month
+    in: path
+    required: true
+    type: integer
+    minimum: 1
+    maximum: 12
+  day:
+    name: day
+    in: path
+    required: true
+    type: integer
+    minimum: 1
+    maximum: 31

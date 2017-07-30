@@ -76,6 +76,15 @@ module ChurchCalendar
       render :apidoc
     end
 
+    get '/swagger.yml' do
+      locals = {
+        email: 'jkb.pavlik@gmail.com',
+        docs_url: url('api-doc'),
+        promulgation_year: ChurchCalendar::CALENDAR_START,
+      }
+      render :'swagger.yml', engine: :erb, locals: locals, layout: nil
+    end
+
     get '/about' do
       render :about
     end

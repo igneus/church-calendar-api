@@ -9,6 +9,7 @@ use Rack::Cors do
   allow do
     origins '*'
     resource '/api/*', :headers => :any, :methods => :get
+    resource '/swagger.yml', :headers => :any, :methods => :get
   end
 end
 

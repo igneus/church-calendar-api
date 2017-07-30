@@ -13,5 +13,9 @@ module ChurchCalendar
     def rank_num
       object.rank.priority
     end
+
+    def colour
+      object.colour.to_sym
+    end
   end
 end

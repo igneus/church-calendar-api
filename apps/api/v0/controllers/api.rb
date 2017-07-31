@@ -23,6 +23,19 @@ module ChurchCalendar
       def build_path(path)
         "/api/#{API_VERSION}/#{params[:lang]}" + path
       end
+
+      # parses content of HTTP header Date
+      def parse_date(date=nil)
+        if date
+          begin
+            Date.parse date
+          rescue ArgumentError
+            error! 'invalid content of HTTP header Date', 400
+          end
+        else
+          Date.today
+        end
+      end
     end
 
     params do
@@ -55,19 +68,19 @@ module ChurchCalendar
           end
 
           get 'yesterday' do
-            day = Date.yesterday
+            day = parse_date(headers['Date']) - 1
             cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           get 'today' do
-            day = Date.today
+            day = parse_date(headers['Date'])
             cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           get 'tomorrow' do
-            day = Date.tomorrow
+            day = parse_date(headers['Date']) + 1
             cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end

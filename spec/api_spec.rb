@@ -125,6 +125,44 @@ describe ChurchCalendar::API do
     end
   end
 
+  describe '/today and friends honor HTTP header Date' do
+    describe 'preferred date format' do
+      it 'returns entry of the specified day' do
+        header 'Date', 'Sat, 01 Jan 2000 01:00:00 GMT'
+        get api_path '/today'
+        last_response.must_be :ok?
+        dejson(last_response.body)['date'].must_equal '2000-01-01'
+      end
+    end
+
+    describe 'legacy date format: RFC 850' do
+      it 'returns entry of the specified day' do
+        header 'Date', 'Saturday, 01-Jan-00 01:00:00 GMT'
+        get api_path '/today'
+        last_response.must_be :ok?
+        dejson(last_response.body)['date'].must_equal '2000-01-01'
+      end
+    end
+
+    describe 'legacy date format: ANSI C asctime()' do
+      it 'returns entry of the specified day' do
+        header 'Date', 'Sat Jan  1 01:00:00 2000'
+        get api_path '/today'
+        last_response.must_be :ok?
+        dejson(last_response.body)['date'].must_equal '2000-01-01'
+      end
+    end
+
+    describe 'unsupported date format' do
+      it 'fails with a helpful message' do
+        header 'Date', 'invalid date'
+        get api_path '/today'
+        last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'invalid content of HTTP header Date'
+      end
+    end
+  end
+
   describe '/year' do
     it 'contains basic per-year "liturgical setup"' do
       get api_path '/2014'

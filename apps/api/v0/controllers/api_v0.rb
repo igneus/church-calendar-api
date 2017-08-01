@@ -2,7 +2,7 @@ require 'oj'
 require 'multi_json'
 
 module ChurchCalendar
-  class API < Grape::API
+  class APIv0 < Grape::API
     include Grape::Extensions::Hash::ParamBuilder
 
     API_VERSION = 'v0'

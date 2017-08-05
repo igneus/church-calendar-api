@@ -9,15 +9,8 @@ module ChurchCalendar
     # The resulting Sanctorale will be provided to all Calendars
     # created here.
     def initialize(*sanctorales)
-      loader = CalendariumRomanum::SanctoraleLoader.new
-      @sanctorale = CalendariumRomanum::Sanctorale.new
-
-      # load sanctorale definitions over each other
-      sanctorales.each do |path|
-        s = CalendariumRomanum::Sanctorale.new
-        loader.load_from_file path, s
-        @sanctorale.update s
-      end
+      @sanctorale = CalendariumRomanum::SanctoraleFactory
+                    .load_layered_from_files(*sanctorales)
     end
 
     def for_year(year)

@@ -34,12 +34,12 @@ module DayEntryFormatExamples
 end
 
 # the API tested using Rack::Test
-describe ChurchCalendar::API do
+describe ChurchCalendar::APIv0 do
   include Rack::Test::Methods
 
   # expected by Rack::Test methods
   def app
-    ChurchCalendar::API
+    ChurchCalendar::APIv0
   end
 
   describe 'language' do

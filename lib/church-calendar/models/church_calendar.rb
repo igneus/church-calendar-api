@@ -14,12 +14,7 @@ module ChurchCalendar
   # languages supported
   LANGS = [:cs, :en, :it, :la]
 
-  @@sanctorale_repository = SanctoraleRepository.load_from CALENDARS_CONFIG, DATA_PATH
-  def self.sanctorale_repository
-    @@sanctorale_repository
-  end
-
-  @@calendars_repository = CalendarRepository.new(@@sanctorale_repository)
+  @@calendars_repository = CalendarRepository.load_from CALENDARS_CONFIG, DATA_PATH
   def self.calendars
     @@calendars_repository
   end

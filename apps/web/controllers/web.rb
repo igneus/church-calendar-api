@@ -32,7 +32,7 @@ module ChurchCalendar
            end_year: end_year,
            today: Date.today,
            cal: cal,
-           calendars: ChurchCalendar.sanctorale_repository.metadata,
+           calendars: ChurchCalendar.calendars.metadata,
           }
       render :browse, locals: l
     end
@@ -67,7 +67,7 @@ module ChurchCalendar
            month: month,
            entries: entries,
            cal: cal,
-           calendars: ChurchCalendar.sanctorale_repository.metadata,
+           calendars: ChurchCalendar.calendars.metadata,
           }
       render :month, locals: l
     end

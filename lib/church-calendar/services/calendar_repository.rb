@@ -11,7 +11,10 @@ module ChurchCalendar
         raise KeyError.new(key)
       end
 
-      CalendarFacade.new key, @sanctorale_repo
+      calendar_factory = @sanctorale_repo.get_calendar_factory key
+      metadata = @sanctorale_repo.metadata key
+
+      CalendarFacade.new calendar_factory, metadata
     end
 
     def_delegators :@sanctorale_repo, :keys, :has_key?

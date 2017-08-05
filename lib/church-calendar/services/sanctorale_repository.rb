@@ -19,7 +19,9 @@ module ChurchCalendar
     # returns a CalendarFactory creating Calendars
     # with a specified Sanctorale
     def get_calendar_factory(key)
-      CalendarFactory.new *data_files(key)
+      sanctorale = CalendariumRomanum::SanctoraleFactory
+                   .load_layered_from_files *data_files(key)
+      CalendarFactory.new sanctorale
     end
 
     # list of available calendars

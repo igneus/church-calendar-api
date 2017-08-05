@@ -18,7 +18,7 @@ module ChurchCalendar
         raise KeyError.new(key)
       end
 
-      CalendarFacade.new get_calendar_factory(key), metadata(key)
+      CalendarFacade.new get_calendar_factory(key), @calendars[key]
     end
 
     # returns a CalendarFactory creating Calendars
@@ -49,17 +49,8 @@ module ChurchCalendar
       end
     end
 
-    # metadata for the given calendar -
-    # or for all if calendar key not specified
-    def metadata(key=nil)
-      if key.nil?
-        # return Hash {key: metadata(key)}
-        return keys.inject({}) {|memo, (k, v)| memo[k] = metadata k; memo}
-      end
-
-      m = @calendars[key].dup
-      m.delete 'files'
-      return m
+    def metadata
+      @calendars
     end
   end
 

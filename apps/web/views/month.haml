@@ -26,4 +26,5 @@
         - d.celebrations.each do |c|
           %div
             %span{class: "celebration #{c.colour.to_sym}"} &nbsp;
-            = celebration_text d, c
+            - r = c.rank.short_desc
+            = "#{c.title}#{', ' + r if r}"

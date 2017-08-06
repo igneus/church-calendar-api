@@ -100,15 +100,6 @@ module ChurchCalendar
 
 
 
-    def format_weekday(i)
-      %w{Sun Mon Tue Wed Thu Fri Sat}[i]
-    end
-
-    def celebration_text(day, celeb)
-      r = celeb.rank.short_desc
-      return "#{celeb.title}#{', ' if r}#{r}"
-    end
-
     def prepare_calendar(cal)
       @cal = ChurchCalendar.calendars[cal]
       I18n.locale = @cal.metadata['language']

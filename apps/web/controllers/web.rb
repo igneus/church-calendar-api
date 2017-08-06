@@ -78,7 +78,7 @@ module ChurchCalendar
 
     get '/swagger.yml' do
       locals = {
-        email: 'jkb.pavlik@gmail.com',
+        email: ChurchCalendar.parameters['contact']['email'],
         docs_url: url('api-doc'),
         promulgation_year: ChurchCalendar::CALENDAR_START,
       }
@@ -86,7 +86,12 @@ module ChurchCalendar
     end
 
     get '/about' do
-      render :about
+      parameters = ChurchCalendar.parameters
+      locals = {
+        maintainer: parameters['contact']['name'],
+        email: parameters['contact']['email'],
+      }
+      render :about, locals: locals
     end
 
     get '/showcase' do

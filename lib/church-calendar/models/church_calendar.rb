@@ -14,8 +14,15 @@ module ChurchCalendar
   # languages supported
   LANGS = [:cs, :en, :it, :la]
 
-  @@calendars_repository = CalendarRepository.load_from CALENDARS_CONFIG, DATA_PATH
+  @@calendars_repository =
+    CalendarRepository.load_from CALENDARS_CONFIG, DATA_PATH
   def self.calendars
     @@calendars_repository
+  end
+
+  @@parameters =
+    YAML.load File.read File.join(APP_ROOT, 'config', 'parameters.yml')
+  def self.parameters
+    @@parameters
   end
 end

@@ -7,6 +7,8 @@ module ChurchCalendar
     def initialize(config, data_path)
       @calendars = config
       @path = data_path
+
+      @sanctorale_loader = CalendariumRomanum::SanctoraleLoader.new
     end
 
     def self.load_from(yaml_config_path, data_path)
@@ -20,18 +22,40 @@ module ChurchCalendar
         raise KeyError.new(key)
       end
 
-      data_files = @calendars[key]['files'].collect do |f|
-        File.join @path, f
+      calendar_config = @calendars[key]
+      data = calendar_config['sanctorale'].collect do |data_spec|
+        load_data data_spec
       end
       sanctorale = CalendariumRomanum::SanctoraleFactory
-                   .load_layered_from_files *data_files
-      factory = CalendarFactory.new sanctorale
+                   .create_layered *data
+      temporale_class = calendar_config['temporale_extensions'] &&
+                        build_temporale_class(calendar_config['temporale_extensions'])
+      factory = CalendarFactory.new sanctorale, temporale_class
 
-      CalendarFacade.new factory, @calendars[key]
+      CalendarFacade.new factory, calendar_config
     end
 
     def metadata
       @calendars
+    end
+
+    private
+
+    def load_data(data_spec)
+      if filename = data_spec['file']
+        @sanctorale_loader.load_from_file File.join(@path, filename)
+      elsif packaged = data_spec['packaged']
+        CalendariumRomanum::Data[packaged].load
+      else
+        raise RuntimeError.new("Invalid data source specification #{data_spec.inspect}")
+      end
+    end
+
+    def build_temporale_class(extensions)
+      classes = extensions.collect do |name|
+        "CalendariumRomanum::Temporale::Extensions::#{name}".constantize
+      end
+      CalendariumRomanum::Temporale.with_extensions(*classes)
     end
   end
 end

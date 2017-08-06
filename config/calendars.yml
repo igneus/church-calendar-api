@@ -4,6 +4,9 @@ general-en: &default
   language: en
   sanctorale:
     - packaged: universal-en
+    ## in order to load your custom calendar, place the file in data/
+    ## and include it like this:
+    # - file: universal-en.txt
 
 general-la:
   title: Calendarium Romanum Generale

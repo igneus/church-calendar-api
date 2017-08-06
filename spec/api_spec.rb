@@ -73,7 +73,17 @@ describe ChurchCalendar::APIv0 do
     it 'returns list of calendars available' do
       get '/api/v0/en/calendars'
       last_response.must_be :ok?
-      dejson(last_response.body).must_equal ['general-en', 'default']
+      dejson(last_response.body)
+        .must_equal %w(general-en general-la general-it czech czech-cechy czech-morava czech-pha czech-ltm czech-hk czech-cb czech-plz czech-olm czech-brn czech-oo default)
+    end
+
+    it 'all calendars work' do
+      get '/api/v0/en/calendars'
+      last_response.must_be :ok?
+      dejson(last_response.body).each do |cal|
+        get "/api/v0/en/calendars/#{cal}/2011/10/9"
+        last_response.must_be :ok?
+      end
     end
   end
 

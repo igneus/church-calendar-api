@@ -4,8 +4,16 @@
 %p
   The Church Calendar API provides access to calendar data
   for any day.
-  You may explore the API by following the links bellow and experimenting
-  with the URIs.
+
+%p
+  %strong Swagger:
+  Apart of this documentation for humans, there is also a
+  %strong
+    %a{href: '/swagger.yml'} Swagger documentation,
+  which can be loaded in your favourite
+  %a{href: 'http://petstore.swagger.io'} Swagger API browser
+  or even used to
+  %a{href: 'https://github.com/swagger-api/swagger-codegen'} generate client code.
 
 %h2 Specify API Version and Language
 
@@ -129,9 +137,17 @@
     %p
       Convenience shortcuts to get calendar entries for the current
       day and for the previous and next one.
-      Don't use these endpoints if you need to serve audience
-      in different timezones or in a single timezone different
-      from the API server's one.
+    %p
+      By default date and time of the server's time zone is used.
+      If you need to serve audience in different timezones
+      or in a single timezone different from the server's one,
+      use endpoint with explicitly specified date instead.
+      Alternatively, if the client provides it's local time
+      in the
+      %code Date
+      HTTP header, the server respects it.
+      But specifying date in request path is definitely
+      the preferred way.
 
     %pre
       = preserve do

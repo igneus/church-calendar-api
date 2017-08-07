@@ -1,5 +1,7 @@
 # Church Calendar API
 
+[![Build Status](https://travis-ci.org/igneus/church-calendar-api.svg?branch=master)](https://travis-ci.org/igneus/church-calendar-api)
+
 Browse Roman Catholic liturgical calendar through a web interface
 or obtain it's data in JSON format through an API.
 

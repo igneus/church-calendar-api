@@ -2,12 +2,14 @@ require_relative 'spec_helper'
 
 # the website tested using Rack::Test
 describe ChurchCalendar::Web do
+  include Rack::Test::Methods
+
   def app
     ChurchCalendar::Web
   end
 
   describe 'pages' do
-    %w(/ /api-doc /showcase).each do |route|
+    %w(/ /api-doc).each do |route|
       it route do
         get route
         last_response.must_be :ok?

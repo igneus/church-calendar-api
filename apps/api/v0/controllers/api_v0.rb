@@ -2,7 +2,9 @@ require 'oj'
 require 'multi_json'
 
 module ChurchCalendar
-  class API < Grape::API
+  class APIv0 < Grape::API
+    include Grape::Extensions::Hash::ParamBuilder
+
     API_VERSION = 'v0'
     version API_VERSION, using: :path
 
@@ -18,24 +20,21 @@ module ChurchCalendar
     end
 
     helpers do
-      def get_year(s)
-        if s == 'current'
-          return Time.now.year
-        end
-
-        year = s.to_i
-        validate_year! year
-        return year
-      end
-
-      def validate_year!(year)
-        if year < CALENDAR_START
-          error! "The calendar was promulgated in #{CALENDAR_START}, #{year} is invalid year", 400
-        end
-      end
-
       def build_path(path)
         "/api/#{API_VERSION}/#{params[:lang]}" + path
+      end
+
+      # parses content of HTTP header Date
+      def parse_date(date=nil)
+        if date
+          begin
+            Date.parse date
+          rescue ArgumentError
+            error! 'invalid content of HTTP header Date', 400
+          end
+        else
+          Date.today
+        end
       end
     end
 
@@ -52,15 +51,12 @@ module ChurchCalendar
           ChurchCalendar.calendars.keys
         end
 
-        segment '/:cal' do
-          before do
-            begin
-              @calendar = ChurchCalendar.calendars[params[:cal]]
-            rescue KeyError
-              error! "Requested calendar '#{params[:cal]}' not found.", 404
-            rescue ChurchCalendar::UnknownCalendarError => err
-              error! err.message, 404
-            end
+        params do
+          requires :calendar, type: String, values: ->(v) { ChurchCalendar.calendars.has_key?(v) }
+        end
+        segment '/:calendar' do
+          after_validation do
+            @calendar = ChurchCalendar.calendars[params[:calendar]]
           end
 
           desc 'Human-readable description of the calendar provided'
@@ -72,26 +68,29 @@ module ChurchCalendar
           end
 
           get 'yesterday' do
-            day = Date.yesterday
+            day = parse_date(headers['Date']) - 1
             cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           get 'today' do
-            day = Date.today
+            day = parse_date(headers['Date'])
             cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
           get 'tomorrow' do
-            day = Date.tomorrow
+            day = parse_date(headers['Date']) + 1
             cal_day = @calendar.day day
             present cal_day, with: ChurchCalendar::Day
           end
 
+          params do
+            requires :year, type: Integer, values: {value: ->(v) { v >= ChurchCalendar::CALENDAR_START }, message: "invalid, the calendar was promulgated in #{CALENDAR_START}"}
+          end
           segment '/:year' do
-            before do
-              @year = get_year params[:year]
+            after_validation do
+              @year = params[:year]
             end
 
             get do

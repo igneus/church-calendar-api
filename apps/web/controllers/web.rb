@@ -23,7 +23,7 @@ module ChurchCalendar
     end
 
     get '/browse/:cal' do |cal|
-      prepare_calendar(Date.today, cal)
+      prepare_calendar(cal)
 
       start_year = Time.now.year - 5
       end_year = start_year + 10
@@ -32,7 +32,7 @@ module ChurchCalendar
            end_year: end_year,
            today: Date.today,
            cal: cal,
-           calendars: ChurchCalendar.sanctorale_repository.metadata,
+           calendars: ChurchCalendar.calendars.metadata,
           }
       render :browse, locals: l
     end
@@ -50,35 +50,24 @@ module ChurchCalendar
       year = year.to_i
       month = month.to_i
 
+      prepare_calendar(cal)
+
       begin
-        date = Date.new(year, month, 1)
+        month_enumerator = CalendariumRomanum::Util::Month.new(year, month)
       rescue ArgumentError
         halt 400
       end
 
-      prepare_calendar(date, cal)
-
-      entries = []
-
-      begin
-        begin
-          entries << @cal.day(date)
-        rescue RangeError
-          if month >= 11
-            prepare_calendar(date, cal)
-            retry
-          end
-        end
-
-        date = date.succ
-      end until date.month != month
+      entries = month_enumerator.collect do |date|
+        @cal.day(date)
+      end
 
       l = {
            year: year,
            month: month,
            entries: entries,
            cal: cal,
-           calendars: ChurchCalendar.sanctorale_repository.metadata,
+           calendars: ChurchCalendar.calendars.metadata,
           }
       render :month, locals: l
     end
@@ -87,41 +76,29 @@ module ChurchCalendar
       render :apidoc
     end
 
+    get '/swagger.yml' do
+      locals = {
+        email: ChurchCalendar.parameters['contact']['email'],
+        docs_url: url('api-doc'),
+        promulgation_year: ChurchCalendar::CALENDAR_START,
+      }
+      render :'swagger.yml', engine: :erb, locals: locals, layout: nil
+    end
+
     get '/about' do
-      render :about
+      parameters = ChurchCalendar.parameters
+      locals = {
+        maintainer: parameters['contact']['name'],
+        email: parameters['contact']['email'],
+      }
+      render :about, locals: locals
     end
 
-    get '/showcase' do
-      render :showcase
-    end
 
 
-
-    def ordinal(i)
-      suff = {1 => 'st', 2 => 'nd', 3 => 'rd'}
-      "#{i}#{suff[i] || 'th'}"
-    end
-
-    def format_weekday(i)
-      %w{Sun Mon Tue Wed Thu Fri Sat}[i]
-    end
-
-    def format_season(s)
-      ss = s.to_s
-      ss[0].upcase + ss[1..-1]
-    end
-
-    def celebration_text(day, celeb)
-      unless celeb.title.empty?
-        r = celeb.rank.short_desc
-        return "#{celeb.title}#{', ' if r}#{r}"
-      end
-
-      return "#{format_weekday day.weekday}, #{ordinal day.season_week} week of #{format_season day.season}"
-    end
-
-    def prepare_calendar(date, cal)
+    def prepare_calendar(cal)
       @cal = ChurchCalendar.calendars[cal]
+      I18n.locale = @cal.metadata['language']
     rescue KeyError
       halt 404
     end

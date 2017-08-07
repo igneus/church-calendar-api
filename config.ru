@@ -2,13 +2,14 @@ require 'rack/cors'
 require 'rack/contrib/response_headers'
 
 require_relative 'lib/church-calendar'
-require_relative 'apps/api/v0'
+require_relative 'apps/api'
 require_relative 'apps/web'
 
 use Rack::Cors do
   allow do
     origins '*'
     resource '/api/*', :headers => :any, :methods => :get
+    resource '/swagger.yml', :headers => :any, :methods => :get
   end
 end
 

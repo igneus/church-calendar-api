@@ -21,9 +21,10 @@
   - entries.each do |d|
     %tr{'id' => d.date.day}
       %td.tar= d.date.day
-      %td= format_weekday d.weekday
+      %td= I18n.t "weekday.#{d.weekday}"
       %td
         - d.celebrations.each do |c|
           %div
-            %span{class: "celebration #{c.colour}"} &nbsp;
-            = celebration_text d, c
+            %span{class: "celebration #{c.colour.to_sym}"} &nbsp;
+            - r = c.rank.short_desc
+            = "#{c.title}#{', ' + r if r}"

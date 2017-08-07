@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/igneus/calendarium-romanum.git
+  revision: 26d6d48043a552043e59ad2789877651c1aea4e2
+  specs:
+    calendarium-romanum (0.2.1)
+      i18n (~> 0.6)
+      thor (~> 0.18)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -11,10 +19,6 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.3)
-    calendarium-romanum (0.3.0)
-      i18n (~> 0.6)
-      roman-numerals (~> 0.3)
-      thor (~> 0.18)
     capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
@@ -99,7 +103,6 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    roman-numerals (0.3.0)
     ruby_dep (1.5.0)
     scorched (0.27)
       rack (~> 1.4)
@@ -131,7 +134,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  calendarium-romanum (= 0.3.0)
+  calendarium-romanum!
   capistrano (~> 3.0.1)
   capistrano-bundler
   capistrano-rvm
@@ -149,9 +152,6 @@ DEPENDENCIES
   rack-test
   rake
   scorched
-
-RUBY VERSION
-   ruby 2.3.1p112
 
 BUNDLED WITH
    1.13.6

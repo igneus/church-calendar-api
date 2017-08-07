@@ -2,104 +2,118 @@
 general-en: &default
   title: General Roman Calendar
   language: en
-  files:
-    - universal-en.txt
+  sanctorale:
+    - packaged: universal-en
+    ## in order to load your custom calendar, place the file in data/
+    ## and include it like this:
+    # - file: universal-en.txt
 
 general-la:
   title: Calendarium Romanum Generale
   language: la
-  files:
-    - universal-la.txt
+  sanctorale:
+    - packaged: universal-la
 
 general-it:
   title: Calendario Romano Generale
   language: it
-  files:
-    - universal-it.txt
+  sanctorale:
+    - packaged: universal-it
 
-czech:
+# The following entries define
+# * common calendar of dioceses of Czech Republic
+# * calendars of it's both provinces - Bohemia and Moravia
+# * calendar of each Bohemian and Moravian diocese
+#
+# They are included as demonstration of configuration capabilities.
+# As maintainer of your own API instance you would probably
+# remove them and eventually supply other local calendars.
+
+czech: &czech
   title: Český národní kalendář
   language: cs
-  files:
-    - czech-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+  temporale_extensions:
+    - ChristEternalPriest
 
-czech-cechy:
+czech-cechy: &czech-bohemia
+  <<: *czech
   title: kalendář české církevní provincie
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-cechy-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-cechy-cs
 
-czech-morava:
+czech-morava: &czech-moravia
+  <<: *czech
   title: kalendář moravské církevní provincie
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-morava-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-morava-cs
 
 czech-pha:
+  <<: *czech
   title: kalendář pražské arcidiecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-cechy-cs.txt
-    - czech-praha-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-cechy-cs
+    - packaged: czech-praha-cs
 
 czech-ltm:
+  <<: *czech
   title: kalendář litoměřické diecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-cechy-cs.txt
-    - czech-litomerice-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-cechy-cs
+    - packaged: czech-litomerice-cs
 
 czech-hk:
+  <<: *czech
   title: kalendář královéhradecké diecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-cechy-cs.txt
-    - czech-hradec-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-cechy-cs
+    - packaged: czech-hradec-cs
 
 czech-cb:
+  <<: *czech
   title: kalendář českobudějovické diecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-cechy-cs.txt
-    - czech-budejovice-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-cechy-cs
+    - packaged: czech-budejovice-cs
 
 czech-plz:
+  <<: *czech
   title: kalendář plzeňské diecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-cechy-cs.txt
-    - czech-plzen-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-cechy-cs
+    - packaged: czech-plzen-cs
 
 czech-olm:
+  <<: *czech
   title: kalendář olomoucké arcidiecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-morava-cs.txt
-    - czech-olomouc-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-morava-cs
+    - packaged: czech-olomouc-cs
 
 czech-brn:
+  <<: *czech
   title: kalendář brněnské diecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-morava-cs.txt
-    - czech-brno-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-morava-cs
+    - packaged: czech-brno-cs
 
 czech-oo:
+  <<: *czech
   title: kalendář ostravsko-opavské diecéze
-  language: cs
-  files:
-    - czech-cs.txt
-    - czech-morava-cs.txt
-    - czech-ostrava-cs.txt
+  sanctorale:
+    - packaged: czech-cs
+    - packaged: czech-morava-cs
+    - packaged: czech-ostrava-cs
 
 default:
   <<: *default

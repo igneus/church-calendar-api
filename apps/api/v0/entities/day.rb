@@ -13,5 +13,9 @@ module ChurchCalendar
     def weekday
       WDAYS[object.date.wday]
     end
+
+    def season
+      object.season.to_sym
+    end
   end
 end

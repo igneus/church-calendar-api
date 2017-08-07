@@ -3,9 +3,9 @@ module ChurchCalendar
   # for date specified in terms of a civic year.
   # Exposes a comfortable interface for calendar querying.
   class CalendarFacade
-    def initialize(key, sanctorale_repo)
-      @metadata = sanctorale_repo.metadata key
-      @calendar_factory = sanctorale_repo.get_calendar_factory key
+    def initialize(calendar_factory, metadata)
+      @calendar_factory = calendar_factory
+      @metadata = metadata
     end
 
     attr_reader :metadata

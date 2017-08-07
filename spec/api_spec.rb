@@ -34,10 +34,12 @@ module DayEntryFormatExamples
 end
 
 # the API tested using Rack::Test
-describe ChurchCalendar::API do
+describe ChurchCalendar::APIv0 do
+  include Rack::Test::Methods
+
   # expected by Rack::Test methods
   def app
-    ChurchCalendar::API
+    ChurchCalendar::APIv0
   end
 
   describe 'language' do
@@ -71,7 +73,17 @@ describe ChurchCalendar::API do
     it 'returns list of calendars available' do
       get '/api/v0/en/calendars'
       last_response.must_be :ok?
-      dejson(last_response.body).must_equal ['general-en', 'default']
+      dejson(last_response.body)
+        .must_equal %w(general-en general-la general-it czech czech-cechy czech-morava czech-pha czech-ltm czech-hk czech-cb czech-plz czech-olm czech-brn czech-oo default)
+    end
+
+    it 'all calendars work' do
+      get '/api/v0/en/calendars'
+      last_response.must_be :ok?
+      dejson(last_response.body).each do |cal|
+        get "/api/v0/en/calendars/#{cal}/2011/10/9"
+        last_response.must_be :ok?
+      end
     end
   end
 
@@ -86,7 +98,8 @@ describe ChurchCalendar::API do
   describe '/calendars/:cal' do
     it 'returns calendar description' do
       get '/api/v0/en/calendars/unknown'
-      last_response.status.must_equal 404
+      last_response.status.must_equal 400
+      dejson(last_response.body)['error'].must_equal 'calendar does not have a valid value'
     end
   end
 
@@ -118,6 +131,44 @@ describe ChurchCalendar::API do
       it 'returns a calendar entry' do
         last_response.must_be :ok?
         @r['date'].must_be_kind_of String
+      end
+    end
+  end
+
+  describe '/today and friends honor HTTP header Date' do
+    describe 'preferred date format' do
+      it 'returns entry of the specified day' do
+        header 'Date', 'Sat, 01 Jan 2000 01:00:00 GMT'
+        get api_path '/today'
+        last_response.must_be :ok?
+        dejson(last_response.body)['date'].must_equal '2000-01-01'
+      end
+    end
+
+    describe 'legacy date format: RFC 850' do
+      it 'returns entry of the specified day' do
+        header 'Date', 'Saturday, 01-Jan-00 01:00:00 GMT'
+        get api_path '/today'
+        last_response.must_be :ok?
+        dejson(last_response.body)['date'].must_equal '2000-01-01'
+      end
+    end
+
+    describe 'legacy date format: ANSI C asctime()' do
+      it 'returns entry of the specified day' do
+        header 'Date', 'Sat Jan  1 01:00:00 2000'
+        get api_path '/today'
+        last_response.must_be :ok?
+        dejson(last_response.body)['date'].must_equal '2000-01-01'
+      end
+    end
+
+    describe 'unsupported date format' do
+      it 'fails with a helpful message' do
+        header 'Date', 'invalid date'
+        get api_path '/today'
+        last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal 'invalid content of HTTP header Date'
       end
     end
   end
@@ -237,7 +288,7 @@ describe ChurchCalendar::API do
       it 'invalid year (too old) returns bad request' do
         get api_path '/1950/12/1'
         last_response.status.must_equal 400
-        dejson(last_response.body)['error'].must_equal 'The calendar was promulgated in 1969, 1950 is invalid year'
+        dejson(last_response.body)['error'].must_equal 'year invalid, the calendar was promulgated in 1969'
       end
 
       it 'invalid day - generally' do

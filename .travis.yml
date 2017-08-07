@@ -16,8 +16,5 @@ git:
 matrix:
   # test with development version of calendarium-romanum and fresh gems
   include:
-    rvm: 2.3.1
-    gemfile: gemfiles/Gemfile.dev
-  include:
     rvm: ruby-head
     gemfile: gemfiles/Gemfile.dev

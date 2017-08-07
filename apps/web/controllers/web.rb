@@ -94,10 +94,6 @@ module ChurchCalendar
       render :about, locals: locals
     end
 
-    get '/showcase' do
-      render :showcase
-    end
-
 
 
     def prepare_calendar(cal)

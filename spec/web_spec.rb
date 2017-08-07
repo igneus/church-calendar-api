@@ -9,7 +9,7 @@ describe ChurchCalendar::Web do
   end
 
   describe 'pages' do
-    %w(/ /api-doc /showcase).each do |route|
+    %w(/ /api-doc).each do |route|
       it route do
         get route
         last_response.must_be :ok?

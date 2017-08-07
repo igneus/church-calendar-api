@@ -17,9 +17,9 @@ group :development do
   gem "guard"
   gem "guard-rack"
 
-  gem 'capistrano', '~> 3.0.1'
+  gem 'capistrano', '~> 3.1'
   gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv', '~> 2.0'
 end
 
 group :testing do

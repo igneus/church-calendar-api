@@ -1,6 +1,6 @@
 require 'grape'
 
-require_relative 'api/v0/controllers/api_v0.rb'
+require_relative 'api/v0.rb'
 
 module ChurchCalendar
   class API < Grape::API

@@ -11,7 +11,7 @@ set :branch, 'calapi.inadiutorium.cz'
 # set :log_level, :debug
 # set :pty, true
 
-# set :linked_files, %w{config/calendars.yml}
+set :linked_files, %w{config/parameters.yml}
 set :linked_dirs, %w{tmp data}
 
 # set :default_env, { var: 'value' }

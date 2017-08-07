@@ -3,7 +3,7 @@ language: ruby
 dist: trusty
 
 rvm:
-  - 2.2.2
+  - 2.2.6
   - 2.3.1
 
 install: bundle install --jobs=3 --deployment --without development

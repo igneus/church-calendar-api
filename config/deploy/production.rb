@@ -44,4 +44,4 @@ set :deploy_to, '/var/www/calapi.inadiutorium'
 
 # RBENV
 set :rbenv_type, :user
-set :rbenv_ruby, '2.2.2'
+set :rbenv_ruby, '2.3.4'

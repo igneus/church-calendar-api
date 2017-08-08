@@ -81,6 +81,7 @@ module ChurchCalendar
         email: ChurchCalendar.parameters['contact']['email'],
         docs_url: url('api-doc'),
         promulgation_year: ChurchCalendar::CALENDAR_START,
+        calendar_ids: ChurchCalendar.calendars.keys,
       }
       render :'swagger.yml', engine: :erb, locals: locals, layout: nil
     end

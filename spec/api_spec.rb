@@ -91,7 +91,17 @@ describe ChurchCalendar::APIv0 do
     it 'returns calendar description' do
       get '/api/v0/en/calendars/default'
       last_response.must_be :ok?
-      dejson(last_response.body).must_be_kind_of Hash
+      dejson(last_response.body)
+        .must_equal({
+                      'system' => {
+                        'promulgated' => 1969,
+                        'desc' => 'promulgated by motu proprio Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).'
+                      },
+                      'sanctorale' => {
+                        'title' => 'General Roman Calendar',
+                        'language' => 'en'
+                      }
+                    })
     end
   end
 

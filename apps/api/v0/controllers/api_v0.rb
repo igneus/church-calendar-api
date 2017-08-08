@@ -62,8 +62,11 @@ module ChurchCalendar
           desc 'Human-readable description of the calendar provided'
           get do
             {
-             system: CALENDAR_SYSTEM_DESC,
-             sanctorale: @calendar.metadata
+              system: CALENDAR_SYSTEM_DESC,
+              sanctorale: {
+                title: @calendar.metadata['title'],
+                language: @calendar.metadata['language'],
+              }
             }
           end
 

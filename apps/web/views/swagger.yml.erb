@@ -247,9 +247,8 @@ parameters:
     in: path
     required: true
     type: string
-    description: |
-      Identifier of the calendar to query.
-      See response of /{lang}/calendars for possible values.
+    enum: [<%= calendar_ids.join(', ') %>]
+    description: Identifier of the calendar to query.
   year:
     name: year
     in: path

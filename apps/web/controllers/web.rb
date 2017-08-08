@@ -10,6 +10,7 @@ module ChurchCalendar
     plugin :sinatra_helpers,
            delegate: false
     plugin :public
+    plugin :halt
 
     route do |r|
       r.root do
@@ -29,8 +30,7 @@ module ChurchCalendar
             @cal = ChurchCalendar.calendars[cal]
             I18n.locale = @cal.metadata['language']
           rescue KeyError
-            response.status = 404
-            r.halt
+            r.halt 404
           end
 
           r.is do
@@ -54,8 +54,7 @@ module ChurchCalendar
             r.on ':month' do |month|
               numeric = /\A\d+\Z/
               unless year =~ numeric && month =~ numeric
-                response.status = 400
-                r.halt
+                r.halt 400
               end
 
               year = year.to_i
@@ -65,8 +64,7 @@ module ChurchCalendar
                 begin
                   month_enumerator = CalendariumRomanum::Util::Month.new(year, month)
                 rescue ArgumentError
-                  response.status = 400
-                  r.halt
+                  r.halt 400
                 end
 
                 entries = month_enumerator.collect do |date|

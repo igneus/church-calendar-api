@@ -10,7 +10,7 @@ gem 'multi_json'
 gem 'oj'
 gem 'puma'
 
-gem 'scorched'
+gem 'roda'
 gem 'haml'
 
 group :development do

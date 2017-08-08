@@ -18,3 +18,4 @@ matrix:
   include:
     rvm: ruby-head
     gemfile: gemfiles/Gemfile.dev
+    install: bundle install --jobs=3 --path=vendor/bundle --without development

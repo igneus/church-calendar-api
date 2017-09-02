@@ -110,6 +110,7 @@
           {
             "system": {
               "promulgated": 1969,
+              "effective_since": 1970,
               "desc": "promulgated by motu proprio Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226)."
             },
             "sanctorale": {
@@ -203,9 +204,9 @@
 
     .alert.alert-warning
       %p
-        %strong Promulgation date as limit:
+        %strong Date of effectiveness as limit:
         The API refuses requests for dates with year being older than
-        the year of promulgation of the implemented calendar system.
+        the year when the calendar system became effective.
         You can find it by hitting the
         %a{href: '#calendar-desc'} calendar description route.
 

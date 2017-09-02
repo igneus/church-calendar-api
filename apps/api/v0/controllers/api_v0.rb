@@ -89,7 +89,7 @@ module ChurchCalendar
           end
 
           params do
-            requires :year, type: Integer, values: {value: ->(v) { v >= ChurchCalendar::CALENDAR_START }, message: "invalid, the calendar was promulgated in #{CALENDAR_START}"}
+            requires :year, type: Integer, values: {value: ->(v) { v >= ChurchCalendar::CALENDAR_START }, message: "invalid, the calendar has been effective only since #{CALENDAR_START}"}
           end
           segment '/:year' do
             after_validation do

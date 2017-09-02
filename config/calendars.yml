@@ -14,6 +14,12 @@ general-la:
   sanctorale:
     - packaged: universal-la
 
+general-fr:
+  title: Calendrier Général Romain
+  language: fr
+  sanctorale:
+    - packaged: universal-fr
+
 general-it:
   title: Calendario Romano Generale
   language: it

@@ -47,6 +47,7 @@ paths:
     parameters:
       - $ref: '#/parameters/lang'
       - $ref: '#/parameters/calendar'
+      - $ref: '#/parameters/date_header'
     get:
       description: Calendar entry for yesterday
       responses:
@@ -59,6 +60,7 @@ paths:
     parameters:
       - $ref: '#/parameters/lang'
       - $ref: '#/parameters/calendar'
+      - $ref: '#/parameters/date_header'
     get:
       description: Calendar entry for today
       responses:
@@ -71,6 +73,7 @@ paths:
     parameters:
       - $ref: '#/parameters/lang'
       - $ref: '#/parameters/calendar'
+      - $ref: '#/parameters/date_header'
     get:
       description: Calendar entry for tomorrow
       responses:
@@ -272,3 +275,16 @@ parameters:
     type: integer
     minimum: 1
     maximum: 31
+  date_header:
+    name: Date
+    in: header
+    required: false
+    type: string
+    format: date
+    description: |
+      Local date and time at which the message was originated,
+      in RFC 1123 date format.
+      If provided, the API server respects it and returns data
+      relative to the client's today, specified in the header,
+      instead of relative to it's own local today
+      (which is default behaviour).

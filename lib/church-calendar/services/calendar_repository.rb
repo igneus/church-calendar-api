@@ -28,9 +28,9 @@ module ChurchCalendar
       end
       sanctorale = CalendariumRomanum::SanctoraleFactory
                    .create_layered *data
-      temporale_class = calendar_config['temporale_extensions'] &&
-                        build_temporale_class(calendar_config['temporale_extensions'])
-      factory = CalendarFactory.new sanctorale, temporale_class
+      temporale_options = calendar_config['temporale_extensions'] &&
+          build_temporale_options(calendar_config['temporale_extensions'])
+      factory = CalendariumRomanum::PerpetualCalendar.new sanctorale: sanctorale, temporale_options: temporale_options
 
       CalendarFacade.new factory, calendar_config
     end
@@ -51,11 +51,12 @@ module ChurchCalendar
       end
     end
 
-    def build_temporale_class(extensions)
-      classes = extensions.collect do |name|
-        "CalendariumRomanum::Temporale::Extensions::#{name}".constantize
-      end
-      CalendariumRomanum::Temporale.with_extensions(*classes)
+    def build_temporale_options(extensions)
+      {
+        extensions: extensions.collect do |name|
+          "CalendariumRomanum::Temporale::Extensions::#{name}".constantize
+        end
+      }
     end
   end
 end

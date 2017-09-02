@@ -12,10 +12,3 @@ script: bundle exec rake test
 
 git:
   depth: 3
-
-matrix:
-  # test with development version of calendarium-romanum and fresh gems
-  include:
-    rvm: ruby-head
-    gemfile: gemfiles/Gemfile.dev
-    install: bundle install --jobs=3 --path=vendor/bundle --without development

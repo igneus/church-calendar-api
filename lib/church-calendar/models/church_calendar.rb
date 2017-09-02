@@ -12,7 +12,7 @@ module ChurchCalendar
   DATA_PATH = File.join APP_ROOT, 'data'
 
   # languages supported
-  LANGS = [:cs, :en, :it, :la]
+  LANGS = [:cs, :en, :fr, :it, :la]
 
   @@calendars_repository =
     CalendarRepository.load_from CALENDARS_CONFIG, DATA_PATH

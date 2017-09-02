@@ -107,6 +107,10 @@ module ChurchCalendar
         }
         view :about, locals: locals
       end
+
+      r.is 'showcase' do
+        view :showcase
+      end
     end
   end
 end

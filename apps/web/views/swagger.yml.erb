@@ -235,7 +235,7 @@ parameters:
     in: path
     required: true
     type: string
-    enum: [en, la, cs, it]
+    enum: [<%= langs.join(', ') %>]
     description: |
       Specifies language used for titles of temporale feasts,
       Sundays and ferials, as well as other localized strings

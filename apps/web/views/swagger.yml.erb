@@ -235,7 +235,7 @@ parameters:
     in: path
     required: true
     type: string
-    enum: [en, la, cs, it]
+    enum: [<%= langs.join(', ') %>]
     description: |
       Specifies language used for titles of temporale feasts,
       Sundays and ferials, as well as other localized strings
@@ -257,7 +257,7 @@ parameters:
     in: path
     required: true
     type: integer
-    minimum: <%= promulgation_year %>
+    minimum: <%= effectiveness_year %>
     description: |
       Year must be greater than or equal to the promulgation year
       of the calendar system.

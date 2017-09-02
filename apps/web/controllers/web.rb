@@ -93,8 +93,9 @@ module ChurchCalendar
         locals = {
           email: ChurchCalendar.parameters['contact']['email'],
           docs_url: request.uri('api-doc'),
-          promulgation_year: ChurchCalendar::CALENDAR_START,
+          effectiveness_year: ChurchCalendar::CALENDAR_START,
           calendar_ids: ChurchCalendar.calendars.keys,
+          langs: ChurchCalendar::LANGS.collect(&:to_s),
         }
         render :'swagger.yml', engine: :erb, locals: locals
       end

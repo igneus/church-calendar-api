@@ -1,9 +1,11 @@
 module ChurchCalendar
 
   # year of promulgation of the implemented calendar system
-  CALENDAR_START = 1969
+  CALENDAR_PROMULGATED = 1969
+  CALENDAR_START = CalendariumRomanum::Calendar::EFFECTIVE_FROM.year
   CALENDAR_SYSTEM_DESC = {
-                          promulgated: CALENDAR_START,
+                          promulgated: CALENDAR_PROMULGATED,
+                          effective_since: CALENDAR_START,
                           desc: "promulgated by motu proprio Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226)."
                          }
 

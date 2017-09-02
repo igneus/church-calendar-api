@@ -100,6 +100,7 @@ describe ChurchCalendar::APIv0 do
         .must_equal({
                       'system' => {
                         'promulgated' => 1969,
+                        'effective_since' => 1970,
                         'desc' => 'promulgated by motu proprio Mysterii Paschalis of Paul VI. (AAS 61 (1969), pp. 222-226).'
                       },
                       'sanctorale' => {
@@ -294,6 +295,8 @@ describe ChurchCalendar::APIv0 do
     end
 
     describe 'invalid date' do
+      YEAR_INVALID_MESSAGE = 'year invalid, the calendar has been effective only since 1970'
+
       it 'invalid month returns bad request' do
         get api_path '/2015/13/1'
         last_response.status.must_equal 400
@@ -303,7 +306,13 @@ describe ChurchCalendar::APIv0 do
       it 'invalid year (too old) returns bad request' do
         get api_path '/1950/12/1'
         last_response.status.must_equal 400
-        dejson(last_response.body)['error'].must_equal 'year invalid, the calendar was promulgated in 1969'
+        dejson(last_response.body)['error'].must_equal YEAR_INVALID_MESSAGE
+      end
+
+      it 'between promulgation and effectiveness' do
+        get api_path '/1969/12/31'
+        last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_equal YEAR_INVALID_MESSAGE
       end
 
       it 'invalid day - generally' do

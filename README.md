@@ -40,6 +40,10 @@ In order to add a new calendar:
 1. put it's data file(s) in the `data` directory
 2. create a new record in `config/calendars.yml`
 
+## Client libraries
+
+* Ruby: [calendarium-romanum-remote][caro_remote]
+
 ## License
 
 GNU/LGPL 3 or later
@@ -47,3 +51,4 @@ GNU/LGPL 3 or later
 [calapi]: http://calapi.inadiutorium.cz
 [caro]: http://github.com/igneus/calendarium-romanum
 [caro_data]: https://github.com/igneus/calendarium-romanum/tree/master/data
+[caro_remote]: https://github.com/igneus/calendarium-romanum-remote

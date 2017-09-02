@@ -54,6 +54,11 @@ describe ChurchCalendar::APIv0 do
         last_response.must_be :ok?
       end
 
+      it 'French' do
+        get '/api/v0/fr/calendars/default/today'
+        last_response.must_be :ok?
+      end
+
       it 'Italian' do
         get '/api/v0/it/calendars/default/today'
         last_response.must_be :ok?

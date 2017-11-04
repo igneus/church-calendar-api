@@ -60,9 +60,18 @@ describe ChurchCalendar::Web do
       end
 
       describe 'invalid year' do
-        it 'fails' do
-          get '/browse/default/noyear/1'
-          last_response.status.must_equal 400
+        describe 'numeric' do
+          it 'fails' do
+            get '/browse/default/1900/1'
+            last_response.status.must_equal 400
+          end
+        end
+
+        describe 'non-numeric' do
+          it 'fails' do
+            get '/browse/default/noyear/1'
+            last_response.status.must_equal 404
+          end
         end
       end
 

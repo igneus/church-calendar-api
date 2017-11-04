@@ -25,7 +25,7 @@ module ChurchCalendar
           r.redirect '/browse/default'
         end
 
-        r.on ':cal' do |cal|
+        r.on String do |cal|
           begin
             @cal = ChurchCalendar.calendars[cal]
             I18n.locale = @cal.metadata['language']
@@ -46,20 +46,12 @@ module ChurchCalendar
             view :browse, locals: l
           end
 
-          r.on ':year' do |year|
+          r.on Integer do |year|
             r.is do
               r.redirect "/browse/#{cal}/#{year}/1"
             end
 
-            r.on ':month' do |month|
-              numeric = /\A\d+\Z/
-              unless year =~ numeric && month =~ numeric
-                r.halt 400
-              end
-
-              year = year.to_i
-              month = month.to_i
-
+            r.on Integer do |month|
               r.is do
                 begin
                   month_enumerator = CalendariumRomanum::Util::Month.new(year, month)
@@ -67,8 +59,12 @@ module ChurchCalendar
                   r.halt 400
                 end
 
-                entries = month_enumerator.collect do |date|
-                  @cal.day(date)
+                begin
+                  entries = month_enumerator.collect do |date|
+                    @cal.day(date)
+                  end
+                rescue RangeError
+                  r.halt 400
                 end
 
                 l = {

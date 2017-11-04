@@ -17,18 +17,18 @@ module DayEntryFormatExamples
   extend Minitest::Spec::DSL
 
   it 'contains expected fields in expected format' do
-    day_entry['date'].must_match /^\d{4}-\d{2}-\d{2}$/
-    day_entry['season'].must_match /^\w+$/
+    day_entry['date'].must_match(/^\d{4}-\d{2}-\d{2}$/)
+    day_entry['season'].must_match(/^\w+$/)
     day_entry['season_week'].must_be_kind_of Integer
-    day_entry['weekday'].must_match /^\w+$/
+    day_entry['weekday'].must_match(/^\w+$/)
 
     day_entry['celebrations'].must_be_kind_of Array
     day_entry['celebrations'].wont_be :empty?
 
     c = day_entry['celebrations'][0]
     c['title'].must_be_kind_of String
-    c['colour'].must_match /^\w+$/
-    c['rank'].must_match /^[\w\s]+$/
+    c['colour'].must_match(/^\w+$/)
+    c['rank'].must_match(/^[\w\s]+$/)
     c['rank_num'].must_be_kind_of Float
   end
 end

@@ -80,7 +80,7 @@ describe ChurchCalendar::CalendarRepository do
         day.celebrations[0].title.must_equal 'Sv. Prokopa, opata'
 
         day = calendar.day(Date.new(2017, 5, 12))
-        day.celebrations[0].title.must_match /Výročí posvěcení katedrály/
+        day.celebrations[0].title.must_match(/Výročí posvěcení katedrály/)
       end
     end
 
@@ -103,7 +103,7 @@ describe ChurchCalendar::CalendarRepository do
         # the extension is applied
         I18n.with_locale(:cs) do
           day = calendar.day(Date.new(2017, 6, 8))
-          day.celebrations[0].title.must_match /Ježíše Krista.+? kněze/
+          day.celebrations[0].title.must_match(/Ježíše Krista.+? kněze/)
         end
       end
     end

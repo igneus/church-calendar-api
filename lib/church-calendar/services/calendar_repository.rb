@@ -27,7 +27,7 @@ module ChurchCalendar
         load_data data_spec
       end
       sanctorale = CalendariumRomanum::SanctoraleFactory
-                   .create_layered *data
+                   .create_layered(*data)
       temporale_options = calendar_config['temporale_extensions'] &&
           build_temporale_options(calendar_config['temporale_extensions'])
       factory = CalendariumRomanum::PerpetualCalendar.new sanctorale: sanctorale, temporale_options: temporale_options

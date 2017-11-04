@@ -11,7 +11,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.3)
-    calendarium-romanum (0.4.0)
+    calendarium-romanum (0.5.0)
       i18n (~> 0.6)
       roman-numerals (~> 0.3)
       thor (~> 0.18)
@@ -50,7 +50,8 @@ GEM
     haml (5.0.2)
       temple (>= 0.8.0)
       tilt
-    i18n (0.8.6)
+    i18n (0.9.1)
+      concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -94,7 +95,7 @@ GEM
     spoon (0.0.6)
       ffi
     temple (0.8.0)
-    thor (0.19.4)
+    thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
     tzinfo (1.2.3)
@@ -109,7 +110,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  calendarium-romanum (= 0.4.0)
+  calendarium-romanum (= 0.5.0)
   grape
   grape-entity
   guard

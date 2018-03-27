@@ -29,9 +29,15 @@ in your Heroku dashboard and push the code.
 
 Typical reasons for running your own instance include:
 
-* availability/reliability requirements (the [reference instance][calapi] is self-hosted by the author and only maintained as free time permits)
+* availability/reliability requirements
+  (the [reference instance][calapi] is self-hosted by the author
+  and only maintained as free time permits;
+  it may be terminated at any time)
 * very high traffic expected
-* custom calendar data that cannot be released as open-source (e.g. because it is copyrighted by the diocese)
+* custom calendar data that cannot be released as open-source
+  (e.g. because it is copyrighted by the diocese)
+* required control over data and algorithm updates
+  (the reference instance is updated without prior notice)
 
 ## Adding custom data
 

@@ -39,6 +39,10 @@ Typical reasons for running your own instance include:
 * required control over data and algorithm updates
   (the reference instance is updated without prior notice)
 
+## Running specs
+
+`$ rake test`
+
 ## Adding custom data
 
 In order to add a new calendar:

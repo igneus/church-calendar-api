@@ -67,7 +67,6 @@ describe ChurchCalendar::APIv0 do
 
     it 'unsupported language results in an error' do
       get '/api/v0/xx/calendars/default/today'
-      last_response.wont_be :ok?
       last_response.status.must_equal 400
       r = dejson last_response.body
       r['error'].must_equal 'lang does not have a valid value'
@@ -109,10 +108,8 @@ describe ChurchCalendar::APIv0 do
                       }
                     })
     end
-  end
 
-  describe '/calendars/:cal' do
-    it 'returns calendar description' do
+    it 'returns an error for an unknown calendar' do
       get '/api/v0/en/calendars/unknown'
       last_response.status.must_equal 400
       dejson(last_response.body)['error'].must_equal 'calendar does not have a valid value'
@@ -189,11 +186,23 @@ describe ChurchCalendar::APIv0 do
     end
   end
 
-  describe '/year' do
+  describe '/:year' do
     it 'contains basic per-year "liturgical setup"' do
       get api_path '/2014'
       last_response.must_be :ok?
       dejson(last_response.body).must_equal({'lectionary' => 'B', 'ferial_lectionary' => 1})
+    end
+
+    it 'returns error for a non-numeric year' do
+      get api_path '/abc'
+      last_response.status.must_equal 400
+      dejson(last_response.body)['error'].must_include 'year must be numeric'
+    end
+
+    it 'returns error for a year too early' do
+      get api_path '/1969'
+      last_response.status.must_equal 400
+      dejson(last_response.body)['error'].must_include YEAR_INVALID_MESSAGE
     end
   end
 
@@ -297,24 +306,6 @@ describe ChurchCalendar::APIv0 do
     describe 'invalid date' do
       YEAR_INVALID_MESSAGE = 'year invalid, the calendar has been effective only since 1970'
 
-      it 'invalid month returns bad request' do
-        get api_path '/2015/13/1'
-        last_response.status.must_equal 400
-        dejson(last_response.body)['error'].must_equal 'month does not have a valid value'
-      end
-
-      it 'invalid year (too old) returns bad request' do
-        get api_path '/1950/12/1'
-        last_response.status.must_equal 400
-        dejson(last_response.body)['error'].must_equal YEAR_INVALID_MESSAGE
-      end
-
-      it 'between promulgation and effectiveness' do
-        get api_path '/1969/12/31'
-        last_response.status.must_equal 400
-        dejson(last_response.body)['error'].must_equal YEAR_INVALID_MESSAGE
-      end
-
       it 'invalid day - generally' do
         get api_path '/2015/2/39'
         last_response.status.must_equal 400
@@ -325,6 +316,12 @@ describe ChurchCalendar::APIv0 do
         get api_path '/2015/2/29'
         last_response.status.must_equal 400
         dejson(last_response.body)['error'].must_equal 'day does not have a valid value'
+      end
+
+      it 'invalid day - non-numeric' do
+        get api_path '/2015/2/xx'
+        last_response.status.must_equal 400
+        dejson(last_response.body)['error'].must_include 'day does not have a valid value'
       end
     end
   end
@@ -352,11 +349,18 @@ describe ChurchCalendar::APIv0 do
     end
 
     describe 'invalid month' do
-      it 'fails' do
+      it 'fails on invalid number' do
         get api_path '/2015/14'
         last_response.status.must_equal 400
         r = dejson last_response.body
         r['error'].must_equal 'month does not have a valid value'
+      end
+
+      it 'fails on a non-numeric value' do
+        get api_path '/2015/xx'
+        last_response.status.must_equal 400
+        r = dejson last_response.body
+        r['error'].must_include 'month does not have a valid value'
       end
     end
 

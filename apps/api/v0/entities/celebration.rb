@@ -3,6 +3,7 @@ module ChurchCalendar
     expose :title, :colour
     expose :rank
     expose :rank_num
+    expose :symbol, as: :id
 
     private
 

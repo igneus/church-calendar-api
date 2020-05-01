@@ -18,9 +18,11 @@ http://calapi.inadiutorium.cz/api-doc
 
 ## Running locally
 
-1. install dependencies using Bundler
-   `$ bundle install`
-2. start application by `$ rackup`
+Make sure you have Docker installed, then run:
+
+```sh
+docker-compose up
+```
 
 ## Running your own instance on Heroku
 

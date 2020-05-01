@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  calendar:
+    image: church-calendar-api
+    build: .
+    ports:
+      - 9292:9292

@@ -3,6 +3,9 @@ module ChurchCalendar
     expose :date
     expose :season
     expose :season_week
+    expose :cycle
+    expose :cycle_sunday
+    expose :cycle_ferial
     expose :celebrations, using: Celebration
     expose :weekday
 

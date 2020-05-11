@@ -88,6 +88,27 @@ module ChurchCalendar
             present cal_day, with: ChurchCalendar::Day
           end
 
+          get 'search' do
+            begin
+              # check the date is valid
+              if params[:date]
+                date = Date.parse params[:date]
+              end
+            rescue ArgumentError
+              error! 'date does not have a valid value', 400
+            end
+
+            result = []
+            if date
+              day = @calendar.day date
+              result.push(day)
+            elsif params[:q]
+              result = @calendar.search_title params[:q]
+            end
+
+            return present result, with: ChurchCalendar::Day
+          end
+
           params do
             requires :year,
                      type: Integer,

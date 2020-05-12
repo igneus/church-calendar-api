@@ -1,5 +1,5 @@
 ---
-general-en: &default
+general-en:
   title: General Roman Calendar
   language: en
   sanctorale:
@@ -25,6 +25,19 @@ general-it:
   language: it
   sanctorale:
     - packaged: universal-it
+
+general-es:
+  title: Calendario Romano General
+  language: es
+  sanctorale:
+    - packaged: universal-es
+
+us-en: &default
+  title: US Calendar
+  language: en
+  sanctorale:
+    - packaged: universal-en
+    - packaged: us-en
 
 # The following entries define
 # * common calendar of dioceses of Czech Republic

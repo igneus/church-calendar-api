@@ -102,7 +102,7 @@ module ChurchCalendar
             if date
               day = @calendar.day date
               result.push(day)
-            elsif params[:q]
+            else
               result = @calendar.search_title params[:q]
             end
 

@@ -50,6 +50,11 @@ module ChurchCalendar
     def search_title(query)
       results = []
       all_result = days_between_today_and_365
+
+      if !query
+        return all_result
+      end
+
       all_result.each do |day|
         matches = day.celebrations.select {|cel| cel.title.downcase.include?(query.downcase)}
         if matches.length > 0

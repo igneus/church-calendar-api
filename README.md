@@ -29,15 +29,21 @@ in your Heroku dashboard and push the code.
 
 Typical reasons for running your own instance include:
 
-* availability/reliability requirements
+- availability/reliability requirements
   (the [reference instance][calapi] is self-hosted by the author
   and only maintained as free time permits;
   it may be terminated at any time)
-* very high traffic expected
-* custom calendar data that cannot be released as open-source
+- very high traffic expected
+- custom calendar data that cannot be released as open-source
   (e.g. because it is copyrighted by the diocese)
-* required control over data and algorithm updates
+- required control over data and algorithm updates
   (the reference instance is updated without prior notice)
+
+## Running with Docker
+
+This repository includes a `dockerfile` and a `docker-compose.yml`. You can run your own instance by running the following command from inside this folder:
+
+`$ docker-compose up -d --build`
 
 ## Running specs
 
@@ -52,7 +58,7 @@ In order to add a new calendar:
 
 ## Client libraries
 
-* Ruby: [calendarium-romanum-remote][caro_remote]
+- Ruby: [calendarium-romanum-remote][caro_remote]
 
 ## License
 

@@ -26,6 +26,12 @@ general-it:
   sanctorale:
     - packaged: universal-it
 
+general-es:
+  title: Calendario Romano General
+  language: es
+  sanctorale:
+    - packaged: universal-es
+
 # The following entries define
 # * common calendar of dioceses of Czech Republic
 # * calendars of it's both provinces - Bohemia and Moravia

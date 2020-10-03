@@ -2,16 +2,16 @@
 
 [![Build Status](https://travis-ci.org/igneus/church-calendar-api.svg?branch=master)](https://travis-ci.org/igneus/church-calendar-api)
 
-Browse Roman Catholic liturgical calendar through a web interface
-or obtain it's data in JSON format through an API.
+Browse the Roman Catholic liturgical calendar through a web interface
+or obtain its data in JSON format through an API.
 
 Powered by
 [calendarium-romanum][caro] and
 grape.
 
-## Explore it on-line
+## Explore it online
 
-Church Calendar API is a more or less RESTful read-only JSON API.
+Church Calendar API is more or less a RESTful read-only JSON API.
 
 API documentation with URI examples and live links to API endpoints:
 http://calapi.inadiutorium.cz/api-doc

@@ -2,16 +2,16 @@
 
 [![Build Status](https://travis-ci.org/igneus/church-calendar-api.svg?branch=master)](https://travis-ci.org/igneus/church-calendar-api)
 
-Browse the Roman Catholic liturgical calendar through a web interface
+Browse Roman Catholic liturgical calendars through a web interface
 or obtain its data in JSON format through an API.
 
 Powered by
 [calendarium-romanum][caro] and
 grape.
 
-## Explore it online
+## Explore it on-line
 
-Church Calendar API is more or less a RESTful read-only JSON API.
+Church Calendar API is a more or less RESTful read-only JSON API.
 
 API documentation with URI examples and live links to API endpoints:
 http://calapi.inadiutorium.cz/api-doc
@@ -53,7 +53,7 @@ This repository includes a `dockerfile` and a `docker-compose.yml`. You can run 
 
 In order to add a new calendar:
 
-1. put it's data file(s) in the `data` directory
+1. put its data file(s) in the `data` directory
 2. create a new record in `config/calendars.yml`
 
 ## Client libraries
